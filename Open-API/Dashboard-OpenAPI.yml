@@ -6,7 +6,7 @@ info:
   contact:
     name: Official
     url: https://academy.alterra.id
-    email: fakhry@alterra.id
+    email: Academy@alterra.id
 externalDocs:
   url: https://alta.id/immersive
   description: dokumentasi API alta immersive BE 13
@@ -115,7 +115,7 @@ paths:
             example: 1
       responses:
         '200':
-          description: A list of users
+          description: A list of all users
           content:
             application/json:
               schema:
@@ -265,6 +265,175 @@ paths:
                 example:
                   status: "success"
                   message: "success update users"
+        '404':
+          $ref: '#/components/responses/404'
+
+ 
+  /teams:
+    post:
+      tags:
+        - Teams
+      summary: add team
+      description: Menambah data Teams
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                team_name: "academy"
+      responses:
+        '201':
+          description: Add team berhasil.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "Add team berhasil"
+        '400':
+          description: Add team gagal.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "failed"
+                  message: "Add team gagal. semua field wajib diisi"
+        '500':
+          $ref: '#/components/responses/500' 
+    get:
+      tags:
+        - Teams
+      summary: get all teams
+      description: Melihat seluruh data teams
+      security:
+        - JWTAuth: []
+      parameters:
+        - name: limit
+          description: "limit"
+          required: false
+          in: query
+          schema:
+            type: integer
+            example: 5
+        - name: offset
+          description: "offset"
+          required: false
+          in: query
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: A list of teams
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "success get all teams"
+                  data:
+                    - id: 1
+                      team_name: "academy"                  
+        '404':
+          $ref: '#/components/responses/404'
+
+  /teams/{id_teams}:
+    get:
+      tags:
+        - Teams
+      summary: get teams by id
+      description: melihat data teams by id
+      security:
+        - JWTAuth: []
+      parameters:
+        - name: id_teams
+          description: "id team"
+          required: true
+          in: path
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: list of teams by id
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "success get teams by id"
+                  data:
+                    - id: 1
+                      team_name: "academy"
+                   
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      tags:
+        - Teams
+      summary: delete teams by id
+      description: delete data teams by id
+      security:
+        - JWTAuth: []
+      parameters:
+        - name: id
+          description: "id teams"
+          required: true
+          in: path
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: delete teams status
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "success delete teams"
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      tags:
+        - Teams
+      summary: update specific teams by id
+      description: update specific data teams by id
+      security:
+        - JWTAuth: []
+      parameters:
+        - name: id
+          description: "id teams"
+          required: true
+          in: path
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                team_name: "academic"
+      responses:
+        '200':
+          description: A list of teams
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "success update teams"
         '404':
           $ref: '#/components/responses/404'
 
