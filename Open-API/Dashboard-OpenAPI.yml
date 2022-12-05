@@ -14,8 +14,8 @@ servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/FEBRYANZAINAL/Immersive-Dashboard-OpenAPI/1.0.0
-  - description: Real BE servers
-    url: http://38.8.1.12:80
+  - description: Real BE servers (in progress)
+    url: http:// #38.8.1.12:80
     variables:
       environment:
         default: dev
@@ -194,7 +194,7 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id
+        - name: id_user
           description: "id user"
           required: true
           in: path
@@ -329,7 +329,7 @@ paths:
         '404':
           $ref: '#/components/responses/404'
 
-  /teams/{id_teams}:
+  /teams/{id_team}:
     get:
       tags:
         - Teams
@@ -338,7 +338,7 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_teams
+        - name: id_team
           description: "id team"
           required: true
           in: path
@@ -369,8 +369,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id
-          description: "id teams"
+        - name: id_team
+          description: "id team"
           required: true
           in: path
           schema:
@@ -396,7 +396,7 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id
+        - name: id_team
           description: "id teams"
           required: true
           in: path
@@ -515,7 +515,7 @@ paths:
         '404':
           $ref: '#/components/responses/404'
 
-  /classes/{id_classes}:
+  /classes/{id_class}:
     get:
       tags:
         - Classes
@@ -524,7 +524,7 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id
+        - name: id_class
           description: "id class"
           required: true
           in: path
@@ -561,7 +561,7 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id
+        - name: id_class
           description: "id class"
           required: true
           in: path
@@ -588,7 +588,7 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id
+        - name: id_class
           description: "id class"
           required: true
           in: path
@@ -661,6 +661,27 @@ components:
           enum:
           - superuser
           - user
+    Teams:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uint
+        team_name: 
+          type: string
+    Classes:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uint
+        class_name:
+          type: string
+        id_user:
+          type: integer
+          format: uint
+        started_date:
+          type: string
 
     ResponseWithoutData:
       type: object
