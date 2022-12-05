@@ -13,7 +13,7 @@ externalDocs:
 servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/iffakhry/alta-be13-api/1.0.0
+    url: https://virtserver.swaggerhub.com/FEBRYANZAINAL/Immersive-Dashboard-OpenAPI/1.0.0
   - description: Real BE servers
     url: http://38.8.1.12:80
     variables:
@@ -53,12 +53,7 @@ paths:
                 full_name: "agus"
                 email: "agus@mail.com"
                 password: "qwerty123"
-                team: [
-                  {
-                    id: 1,
-                    team_name: "academic"
-                  }
-                ]
+                id_team: 1
                 role: "default"
                 status: "active"
                 permission: "superuser"
@@ -125,26 +120,24 @@ paths:
                   message: "success get all users"
                   data:
                     - id: 1
-                      name: "agus"
+                      full_name: "agus"
                       email: "agus@mail.com"
-                      team: [
+                      team: 
                         {
                           id: 1,
                           team_name: "academic"
                         }
-                      ]
                       role: "default"
                       status: "active"
                       permission: "superuser"
                     - id: 2
-                      name: "sisca"
+                      full_name: "sisca"
                       email: "sisca@mail.com"
-                      team: [
+                      team: 
                         {
                           id: 2,
                           team_name: "people"
                         }
-                      ]
                       role: "default"
                       status: "active"
                       permission: "user"
@@ -180,14 +173,13 @@ paths:
                   message: "success get users by id"
                   data:
                     - id: 1
-                      name: "agus"
+                      full_name: "agus"
                       email: "agus@mail.com"
-                      team: [
+                      team: 
                         {
                           id: 1,
                           team_name: "academic"
                         }
-                      ]
                       role: "default"
                       status: "active"
                       permission: "superuser"
@@ -246,12 +238,7 @@ paths:
                 full_name: "agus"
                 email: "agus@mail.com"
                 password: "qwerty123"
-                team: [
-                  {
-                    id: 1,
-                    team_name: "academic"
-                  }
-                ]
+                id_team: 1
                 role: "default"
                 status: "active"
                 permission: "superuser"
@@ -437,6 +424,177 @@ paths:
         '404':
           $ref: '#/components/responses/404'
 
+
+  /classes:
+    post:
+      tags:
+        - Classes
+      summary: add Class
+      description: Menambah data Class
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                class_name: "BE 13"
+                user: "fakhry"
+
+      responses:
+        '201':
+          description: Add team berhasil.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "Add team berhasil"
+        '400':
+          description: Add team gagal.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "failed"
+                  message: "Add team gagal. semua field wajib diisi"
+        '500':
+          $ref: '#/components/responses/500' 
+    get:
+      tags:
+        - Teams
+      summary: get all teams
+      description: Melihat seluruh data teams
+      security:
+        - JWTAuth: []
+      parameters:
+        - name: limit
+          description: "limit"
+          required: false
+          in: query
+          schema:
+            type: integer
+            example: 5
+        - name: offset
+          description: "offset"
+          required: false
+          in: query
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: A list of teams
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "success get all teams"
+                  data:
+                    - id: 1
+                      team_name: "academy"                  
+        '404':
+          $ref: '#/components/responses/404'
+
+  /classes/{id_classes}:
+    get:
+      tags:
+        - Teams
+      summary: get teams by id
+      description: melihat data teams by id
+      security:
+        - JWTAuth: []
+      parameters:
+        - name: id_teams
+          description: "id team"
+          required: true
+          in: path
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: list of teams by id
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "success get teams by id"
+                  data:
+                    - id: 1
+                      team_name: "academy"
+                   
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      tags:
+        - Teams
+      summary: delete teams by id
+      description: delete data teams by id
+      security:
+        - JWTAuth: []
+      parameters:
+        - name: id
+          description: "id teams"
+          required: true
+          in: path
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: delete teams status
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "success delete teams"
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      tags:
+        - Teams
+      summary: update specific teams by id
+      description: update specific data teams by id
+      security:
+        - JWTAuth: []
+      parameters:
+        - name: id
+          description: "id teams"
+          required: true
+          in: path
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                team_name: "academic"
+      responses:
+        '200':
+          description: A list of teams
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "success update teams"
+        '404':
+          $ref: '#/components/responses/404'
+
 ####################################
 #...COMPONENTS...#
 ####################################
@@ -455,16 +613,14 @@ components:
         id:
           type: integer
           format: int64
-        name:
+        fullname:
           type: string
         email:
           type: string
         password:
           type: string
-        phone:
-          type: string
-        address:
-          type: string
+        id_team:
+          type: integer
         role:
           type: string
           enum:
@@ -472,6 +628,7 @@ components:
             - user
         status:
           type: boolean
+        permission:
         created_at:
           type: string
           format: date-time
