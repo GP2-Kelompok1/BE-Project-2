@@ -595,6 +595,402 @@ paths:
         '404':
           $ref: '#/components/responses/404'
 
+  /mentees:
+    post:
+      tags:
+        - Mentees
+      summary: add mentee
+      description: Menambah data Mentee (register)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                mentee_name: "Mahmuda Karima"
+                email: "daka@gmail.com"
+                phone: "081234567"
+                current_address: "jl rumah saya palembang"
+                home_address: "jl rumah saya palembang"
+                telegram: "@daka"
+                gender: "L"
+                education_type: "non-informatics"
+                education_major: "akuntansi"
+                education_graduate: "2022"
+                education_institution: "SMA 1 Palembang"
+                emergency_name: "bapak ku"
+                emergency_phone: "08123457"
+                emergency_status: "orang tua"
+                status: "interview"
+                class_id: 1
+      responses:
+        '201':
+          description: Register berhasil.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "register berhasil"
+        '400':
+          description: Register gagal.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "failed"
+                  message: "register gagal. semua field wajib diisi"
+        '500':
+          $ref: '#/components/responses/500'
+          #description: Register gagal.
+          #content:
+            #application/json:
+              #schema:
+                #type: object
+                #example:
+                  #status: "failed"
+                  #message: "register gagal"
+    get:
+      tags:
+        - Mentees
+      summary: Get All Mentee
+      description: Menampilkan semua data Mentee 
+      security:
+         - JWTAuth: []
+      parameters:
+        - name: limit
+          description: "limit"
+          required: false
+          in: query
+          schema:
+            type: integer
+            example: 10
+        - name: offset
+          description: "offset"
+          required: false
+          in: query
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: A list of all mentees
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "success get all mentees"
+                  data:
+                    - id: 1
+                      class:
+                      {
+                        id: 1,
+                        class_name : "BE_11"
+                      }
+                      full_name: "M.Yusuf"
+                      status: "On Class"
+                      education_type: "non-informatics"
+                      gender : "L"
+
+                    - id: 2
+                      class:
+                      {
+                        id: 2,
+                        class_name : "FE_8"
+                      }
+                      full_name: "Wendy"
+                      status: "On Class"
+                      education_type: "non-informatics"
+                      gender : "L"
+                  
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/schemas/ResponseWithoutData'
+  /mentees/{id_mentees}:
+    get:
+      tags:
+        - Mentees
+      summary: get mentees by id
+      description: melihat data mentees by id
+      security:
+        - JWTAuth: []
+      parameters:
+        - name: id_mentee
+          description: "id mentee"
+          required: true
+          in: path
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: list of mentees by id
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "success get mentees by id"
+                  data:
+                    - id: 1
+                      class:
+                      {
+                        id: 1,
+                        class_name : "BE_11"
+                      }
+                      full_name: "M. Yusup"
+                      email: "myusup@gmail.com"
+                      phone: "081234567"
+                      current_address: "jl rumah saya palembang"
+                      home_address: "jl rumah saya palembang"
+                      telegram: "@daka"
+                      gender: "L"
+                      education_type: "non-informatics"
+                      education_major: "akuntansi"
+                      education_graduate: "2022"
+                      education_institution: "SMA 1 Palembang"
+                      emergency_name: "bapak ku"
+                      emergency_phone: "08123457"
+                      emergency_status: "orang tua"
+                      feedback: 
+                      {
+                        id: 1,
+                        mentee_status: "Ini bagian notes untuk mentee yang bersangkutan",
+                        id_user: "Jerry",
+                        changed_status: "Join"
+                      }
+
+                   
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      tags:
+        - Mentees
+      summary: delete mentees by id
+      description: delete data mentees by id
+      security:
+        - JWTAuth: []
+      parameters:
+        - name: id_mentee
+          description: "id mentees"
+          required: true
+          in: path
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: delete mentees status
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "success delete mentees"
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      tags:
+        - mentees
+      summary: update specific mentee by id
+      description: update specific data mentees by id
+      security:
+        - JWTAuth: []
+      parameters:
+        - name: id_mentee
+          description: "id mentees"
+          required: true
+          in: path
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                mentee_name: "Rachman Kamil"
+                email: "kamil@mail.com"
+                phone: "081123131"
+                telegram: "@kamil"
+                gendel: "L"
+      responses:
+        '200':
+          description: A list of Mentees
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "success update mentees"
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+
+  /feedback:
+    post:
+      tags:
+        - Feedbacks
+      summary: post feedback
+      description: menambah feedback
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id: 1
+                deskripsi: "Ini bagian notes untuk mentee yang bersangkutan"
+                user:
+                  {
+                    id_user: 1,
+                    full_name: "jerry"         
+                  }
+                changed_status: "join"
+      responses:
+        '201':
+          description: Add feedback berhasil.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "Add feedback berhasil"
+        '404':
+          description: Add feedback gagal.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "failed"
+                  message: "Add feedback gagal. semua field wajib diisi"
+        '500':
+          $ref: '#/components/responses/500'    
+  /feedback/{id_mentee}:
+    get:
+      tags:
+        - Feedbacks
+      summary: get feedback mentees by id
+      description: melihat data feedback mentees by id
+      security:
+        - JWTAuth: []
+      parameters:
+        - name: id_mentee
+          description: "id mentee"
+          required: true
+          in: path
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: list of feedback mentees by id
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "success get feedback mentees by id"
+                  data:
+                    - id: 1
+                      full_name: "M. Yusup"
+                      feedbacks:
+                        {
+                          id: 1,
+                          id_user: 1,
+                          deskripsi: "Ini bagian notes untuk mentee yang bersangkutan 1"
+                        }
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /feedbacks/{id_feedback}:
+    delete:
+      tags:
+        - Feedbacks
+      summary: delete feedbacks by id
+      description: delete data feedback by id
+      security:
+        - JWTAuth: []
+      parameters:
+        - name: id_feedback
+          description: "id feedback"
+          required: true
+          in: path
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: delete feedback
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "success delete feedbacks"
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    put:
+      tags:
+        - Feedbacks
+      summary: update specific feedbacks by id
+      description: update specific data feedback by id
+      security:
+        - JWTAuth: []
+      parameters:
+        - name: id_feedback
+          description: "id feedback"
+          required: true
+          in: path
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id: 1
+                deskripsi: "update notes untuk yang bersangkutan"
+                
+      responses:
+        '200':
+          description: success update feedback
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  message: "success update users"
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
 ####################################
 #...COMPONENTS...#
 ####################################
@@ -629,9 +1025,70 @@ components:
         status:
           type: boolean
         permission:
-        created_at:
           type: string
-          format: date-time
+          enum:
+            - superuser
+            - user
+       
+    Mentee:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uint
+        mentee_name:
+          type: string
+        id_class:
+          type: integer
+          format: uint
+        status:
+          type: string
+          enum:
+           - active
+           - not-active
+        kategori:
+          type: string
+        gender:
+          type: integer
+        current_address:
+          type: string
+        home_address:
+          type: string
+        email:
+          type: string
+        telegram:
+          type: string
+        emergency_phone:
+          type: string
+        emergency_status:
+          type: string
+        education_type:
+          type: string
+        education_major:
+          type: string
+        education_graduate:
+          type: string
+        education_institution:
+          type: string
+        
+    feedback:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uint
+        id_mentee:
+          type: integer
+          format: uint
+        id_user:
+          type: integer
+          format: uint
+        deskripsi:
+          type: string
+        mentee_status:
+          type: string
+        changed_status:
+          type: string
 
     ResponseWithoutData:
       type: object
