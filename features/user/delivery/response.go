@@ -3,26 +3,27 @@ package delivery
 import "immersive-dashboard/features/user"
 
 type UserResponse struct {
-	ID      uint   `json:"id"`
-	Name    string `json:"name"`
-	Email   string `json:"email"`
-	Phone   string `json:"phone"`
-	Address string `json:"address"`
-	Role    string `json:"role"`
+	ID         uint          `json:"id"`
+	Full_Name  string        `json:"full_name"`
+	Email      string        `json:"email"`
+	Teams      user.CoreTeam `json:"teams"`
+	Role       string        `json:"role"`
+	Status     string        `json:"status"`
+	Permission string        `json:"permission"`
 }
 
-func fromCore(dataCore user.Core) UserResponse {
+func fromCore(dataCore user.CoreUser) UserResponse {
 	return UserResponse{
-		ID:      dataCore.ID,
-		Name:    dataCore.Name,
-		Email:   dataCore.Email,
-		Phone:   dataCore.Phone,
-		Address: dataCore.Address,
-		Role:    dataCore.Role,
+		ID:        dataCore.ID,
+		Full_Name: dataCore.Full_Name,
+		Email:     dataCore.Email,
+		Teams:     dataCore.Teams,
+		Role:      dataCore.Role,
+		Status:    dataCore.Status,
 	}
 }
 
-func fromCoreList(dataCore []user.Core) []UserResponse {
+func fromCoreList(dataCore []user.CoreUser) []UserResponse {
 	var dataResponse []UserResponse
 	for _, v := range dataCore {
 		dataResponse = append(dataResponse, fromCore(v))

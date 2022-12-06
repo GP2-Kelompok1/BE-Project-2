@@ -9,49 +9,45 @@ import (
 // struct gorm model
 type User struct {
 	gorm.Model
-	Name     string
-	Email    string
-	Password string
-	Phone    string `gorm:"type:varchar(15)"`
-	Address  string
-	Role     string
-	// Books    []Book
+	Full_Name  string
+	Email      string
+	Password   string
+	Teams      Team
+	Role       string
+	Status     string
+	Permission string
+}
+type Team struct {
+	gorm.Model
+	Team_Name string
 }
 
-// DTO
-// mapping
-
 // mengubah struct core ke struct model gorm
-func fromCore(dataCore _user.Core) User {
+func fromCore(dataCore _user.CoreUser) User {
 	userGorm := User{
-		Name:     dataCore.Name,
-		Email:    dataCore.Email,
-		Password: dataCore.Password,
-		Phone:    dataCore.Phone,
-		Address:  dataCore.Address,
-		Role:     dataCore.Role,
+		Full_Name: dataCore.Full_Name,
+		Email:     dataCore.Email,
+		Password:  dataCore.Password,
+		Teams:     dataCore.Teams,
+		Role:      dataCore.Role,
 	}
 	return userGorm
 }
 
 // mengubah struct model gorm ke struct core
-func (dataModel *User) toCore() _user.Core {
-	return _user.Core{
+func (dataModel *User) toCore() _user.CoreUser {
+	return _user.CoreUser{
 		ID:        dataModel.ID,
-		Name:      dataModel.Name,
+		Full_Name: dataModel.Full_Name,
 		Email:     dataModel.Email,
 		Password:  dataModel.Password,
-		Phone:     dataModel.Phone,
-		Address:   dataModel.Address,
 		Role:      dataModel.Role,
-		CreatedAt: dataModel.CreatedAt,
-		UpdatedAt: dataModel.UpdatedAt,
 	}
 }
 
 // mengubah slice struct model gorm ke slice struct core
-func toCoreList(dataModel []User) []_user.Core {
-	var dataCore []_user.Core
+func toCoreList(dataModel []User) []_user.CoreUser {
+	var dataCore []_user.CoreUser
 	for _, v := range dataModel {
 		dataCore = append(dataCore, v.toCore())
 	}

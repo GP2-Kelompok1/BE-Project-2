@@ -2,34 +2,37 @@ package repository
 
 import (
 	"immersive-dashboard/features/auth"
-	"time"
 
 	"gorm.io/gorm"
 )
 
 type User struct {
-	ID        uint
-	FullName  string
-	Email     string `gorm:"unique"`
-	Password  string
-	Role      string `gorm:"type:enum('default', 'admin');default:'default'"`
-	Status    bool
-	TeamID    uint
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt gorm.DeletedAt
+	gorm.Model
+	Full_Name  string
+	Email      string `gorm:"unique"`
+	Password   string
+	Teams      []Team
+	Role       string
+	Status     string
+	Permission string
+}
+
+type Team struct {
+	gorm.Model
+	Team_Name string
 }
 
 //DTO
 
-func (data User) toCore() auth.Core {
-	return auth.Core{
-		ID:        int(data.ID),
-		FullName:  data.FullName,
-		Email:     data.Email,
-		Password:  data.Password,
-		Role:      data.Role,
-		CreatedAt: data.CreatedAt,
-		UpdatedAt: data.UpdatedAt,
+func (data User) toCore() auth.CoreUser {
+	return auth.CoreUser{
+		Model:      gorm.Model{},
+		Full_Name:  data.Full_Name,
+		Email:      data.Email,
+		Password:   data.Password,
+		Teams:      []auth.CoreTeam{},
+		Role:       data.Role,
+		Status:     data.Status,
+		Permission: data.Permission,
 	}
 }

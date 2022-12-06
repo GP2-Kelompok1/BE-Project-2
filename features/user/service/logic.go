@@ -20,11 +20,7 @@ func New(repo user.RepositoryInterface) user.ServiceInterface {
 }
 
 // Create implements user.ServiceInterface
-func (service *userService) Create(input user.Core) (err error) {
-	//validate
-	// if input.Name == "" || input.Email == "" || input.Password == "" {
-	// 	return errors.New("Name, email, password harus diisi")
-	// }
+func (service *userService) Create(input user.CoreUser) (err error) {
 	input.Role = "user"
 	if errValidate := service.validate.Struct(input); errValidate != nil {
 		return errValidate
@@ -37,7 +33,7 @@ func (service *userService) Create(input user.Core) (err error) {
 }
 
 // GetAll implements user.ServiceInterface
-func (service *userService) GetAll() (data []user.Core, err error) {
+func (service *userService) GetAll() (data []user.CoreUser, err error) {
 	data, err = service.userRepository.GetAll()
 	return
 
