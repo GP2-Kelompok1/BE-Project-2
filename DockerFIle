@@ -10,6 +10,6 @@ COPY ./ /app
 
 RUN go mod tidy
 
-RUN go build -o Immersive-Dashboard-Docker
+RUN go build -o Dashboard-Docker
 
-CMD ["./Immersive-Dashboard-Docker"]
+CMD ["./Dashboard-Docker"]
