@@ -20,6 +20,9 @@ func New(service user.ServiceInterface, e *echo.Echo) {
 
 	e.GET("/users", handler.GetAll, middlewares.JWTMiddleware())
 	e.POST("/users", handler.Create)
+	// e.GET("/users/:id", handler.GetById)
+	// e.PUT("/users/:id", handler.Update)
+	// e.DELETE("/users/:id", handler.Delete)
 }
 
 func (delivery *UserDelivery) GetAll(c echo.Context) error {
@@ -47,3 +50,19 @@ func (delivery *UserDelivery) Create(c echo.Context) error {
 	}
 	return c.JSON(http.StatusCreated, helper.SuccessResponse("success create data"))
 }
+
+// func (delivery *UserDelivery) GetById(c echo.Context) error {
+// 	id, errconv := strconv.Atoi(c.Param("id"))
+// 	if errconv != nil {
+// 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error read data "))
+// 	}
+// 	dataCore := toCore(id)
+// }
+
+// func (delivery *UserDelivery) Update(c echo.Context) error {
+
+// }
+
+// func (delivery *UserDelivery) Delete(c echo.Context) error {
+
+// }

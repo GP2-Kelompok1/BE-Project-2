@@ -1,23 +1,27 @@
 package delivery
 
-import "immersive-dashboard/features/user"
+import (
+	"immersive-dashboard/features/user"
+)
 
 type UserRequest struct {
-	Name     string `json:"name" form:"name"`
-	Email    string `json:"email" form:"email"`
-	Password string `json:"password" form:"password"`
-	Phone    string `json:"phone" form:"phone"`
-	Address  string `json:"address" form:"address"`
-	Role     string `json:"role" form:"role"`
+	Full_Name  string        `json:"full_name" form:"full_name"`
+	Email      string        `json:"email" form:"email"`
+	Password   string        `json:"password" form:"password"`
+	Teams      user.CoreTeam `json:"team_id" form:"team_id"`
+	Role       string        `json:"role" form:"role"`
+	Status     string        `json:"status" form:"status"`
+	Permission string        `json:"permission" form:"permission"`
 }
 
-func toCore(data UserRequest) user.Core {
-	return user.Core{
-		Name:     data.Name,
-		Email:    data.Email,
-		Password: data.Password,
-		Phone:    data.Phone,
-		Address:  data.Address,
-		Role:     data.Role,
+func toCore(data UserRequest) user.CoreUser {
+	return user.CoreUser{
+		Full_Name:  data.Full_Name,
+		Email:      data.Email,
+		Password:   data.Password,
+		Teams:      data.Teams,
+		Role:       data.Role,
+		Status:     data.Status,
+		Permission: data.Permission,
 	}
 }
