@@ -12,14 +12,16 @@ type User struct {
 	Full_Name  string
 	Email      string
 	Password   string
-	Teams      Team
+	TeamID     uint // <<tidak ada underscore (default setting)
 	Role       string
 	Status     string
 	Permission string
+	Teams      Team
 }
 type Team struct {
 	gorm.Model
 	Team_Name string
+	Users     []User
 }
 
 // mengubah struct core ke struct model gorm
@@ -28,7 +30,7 @@ func fromCore(dataCore _user.CoreUser) User {
 		Full_Name: dataCore.Full_Name,
 		Email:     dataCore.Email,
 		Password:  dataCore.Password,
-		Teams:     dataCore.Teams.ID,
+		TeamID:    dataCore.Teams.ID, // <<< lihat ini
 		Role:      dataCore.Role,
 	}
 	return userGorm
