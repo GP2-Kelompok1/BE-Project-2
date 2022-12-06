@@ -28,7 +28,7 @@ func fromCore(dataCore _user.CoreUser) User {
 		Full_Name: dataCore.Full_Name,
 		Email:     dataCore.Email,
 		Password:  dataCore.Password,
-		Teams:     dataCore.Teams,
+		Teams:     dataCore.Teams.ID,
 		Role:      dataCore.Role,
 	}
 	return userGorm
