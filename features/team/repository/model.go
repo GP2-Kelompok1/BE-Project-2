@@ -22,6 +22,7 @@ type User struct {
 	Role       string
 	Status     string
 	Permission string
+	Teams      Team
 }
 
 // mengubah struct core ke struct model gorm
