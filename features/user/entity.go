@@ -1,26 +1,33 @@
 package user
 
-import "time"
+type CoreUser struct {
+	ID         uint
+	Full_Name  string `validate:"required"`
+	Email      string `validate:"required,email"`
+	Password   string `validate:"required"`
+	Teams      CoreTeam
+	Role       string
+	Status     string
+	Permission string
+}
 
-type Core struct {
+type CoreTeam struct {
 	ID        uint
-	Name      string `validate:"required"`
-	Email     string `validate:"required,email"`
-	Password  string `validate:"required"`
-	Phone     string `validate:"required"`
-	Address   string
-	Role      string `validate:"required"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	Team_Name string
 }
 
 type ServiceInterface interface {
-	GetAll() (data []Core, err error)
-	Create(input Core) (err error)
+	GetAll() (data []CoreUser, err error)
+	Create(input CoreUser) (err error)
+	// GetById(id int) (data CoreUser, err error)
+	// Update(data CoreUser, id int) (string, error)
+	// Delete(id int) (string, error)
 }
 
 type RepositoryInterface interface {
-	GetAll() (data []Core, err error)
-	Create(input Core) (row int, err error)
-	GetById(id int) (data Core, err error)
+	GetAll() (data []CoreUser, err error)
+	Create(input CoreUser) (row int, err error)
+	// GetById(id int) (data CoreUser, err error)
+	// Update(data CoreUser, id int) (string, error)
+	// Delete(id int) (string, error)
 }

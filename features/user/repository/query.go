@@ -18,7 +18,7 @@ func New(db *gorm.DB) user.RepositoryInterface {
 }
 
 // Create implements user.Repository
-func (repo *userRepository) Create(input user.Core) (row int, err error) {
+func (repo *userRepository) Create(input user.CoreUser) (row int, err error) {
 	userGorm := fromCore(input)
 	tx := repo.db.Create(&userGorm) // proses insert data
 	if tx.Error != nil {
@@ -31,7 +31,7 @@ func (repo *userRepository) Create(input user.Core) (row int, err error) {
 }
 
 // GetAll implements user.Repository
-func (repo *userRepository) GetAll() (data []user.Core, err error) {
+func (repo *userRepository) GetAll() (data []user.CoreUser, err error) {
 	var users []User
 
 	tx := repo.db.Find(&users)
@@ -43,6 +43,6 @@ func (repo *userRepository) GetAll() (data []user.Core, err error) {
 }
 
 // GetById implements user.RepositoryInterface
-func (*userRepository) GetById(id int) (data user.Core, err error) {
+func (*userRepository) GetById(id int) (data user.CoreUser, err error) {
 	panic("unimplemented")
 }

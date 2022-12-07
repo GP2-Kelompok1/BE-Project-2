@@ -9,8 +9,8 @@ type UserRequest struct {
 	Password string `json:"password" form:"password"`
 }
 
-func ToCore(userReq UserRequest) auth.Core {
-	userCore := auth.Core{
+func ToCore(userReq UserRequest) auth.CoreUser {
+	userCore := auth.CoreUser{
 		Email:    userReq.Email,
 		Password: userReq.Password,
 	}
