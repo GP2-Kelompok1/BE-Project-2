@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"immersive-dashboard/features/user"
 	_user "immersive-dashboard/features/user"
 
 	"gorm.io/gorm"
@@ -17,20 +18,24 @@ type User struct {
 	Role       string
 	Status     string
 	Permission string
+	Teams      Team
 }
 type Team struct {
 	gorm.Model
 	Team_Name string
+	Users     []User
 }
 
 // mengubah struct core ke struct model gorm
 func fromCore(dataCore _user.CoreUser) User {
 	userGorm := User{
-		Full_Name: dataCore.Full_Name,
-		Email:     dataCore.Email,
-		Password:  dataCore.Password,
-		TeamID:    dataCore.Teams.ID, // <<< lihat ini
-		Role:      dataCore.Role,
+		Full_Name:  dataCore.Full_Name,
+		Email:      dataCore.Email,
+		Password:   dataCore.Password,
+		TeamID:     dataCore.Teams.ID, // <<< lihat ini
+		Role:       dataCore.Role,
+		Status:     dataCore.Status,
+		Permission: dataCore.Permission,
 	}
 	return userGorm
 }
@@ -41,8 +46,13 @@ func (dataModel *User) toCore() _user.CoreUser {
 		ID:        dataModel.ID,
 		Full_Name: dataModel.Full_Name,
 		Email:     dataModel.Email,
-		Password:  dataModel.Password,
-		Role:      dataModel.Role,
+		Teams: user.CoreTeam{ // <<< lihat ini
+			ID:        dataModel.TeamID,
+			Team_Name: dataModel.Teams.Team_Name,
+		},
+		Role:       dataModel.Role,
+		Status:     dataModel.Status,
+		Permission: dataModel.Permission,
 	}
 }
 
