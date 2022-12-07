@@ -12,6 +12,8 @@ type Class struct {
 	Class_Name   string
 	UserID       uint
 	Started_Date string
+	End_Date     string
+	Users        User
 }
 
 type User struct {
@@ -23,6 +25,7 @@ type User struct {
 	Role       string
 	Status     string
 	Permission string
+	Classes    []Class
 }
 
 // mengubah struct core ke struct model gorm
@@ -31,6 +34,7 @@ func fromCore(dataCore _class.CoreClass) Class {
 		Class_Name:   dataCore.Class_Name,
 		UserID:       dataCore.Users.ID,
 		Started_Date: dataCore.Started_Date,
+		End_Date:     dataCore.End_Date,
 	}
 	return classGorm
 }
@@ -42,6 +46,7 @@ func (dataModel *Class) toCore() _class.CoreClass {
 		Class_Name:   dataModel.Class_Name,
 		Users:        dataModel.UserID.ID,
 		Started_Date: dataModel.Started_Date,
+		End_Date:     dataModel.End_Date,
 	}
 }
 

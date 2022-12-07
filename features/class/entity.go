@@ -5,6 +5,7 @@ type CoreClass struct {
 	Class_Name   string
 	Users        CoreUser
 	Started_Date string
+	End_Date     string
 }
 
 type CoreUser struct {
