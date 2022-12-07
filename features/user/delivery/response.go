@@ -17,9 +17,13 @@ func fromCore(dataCore user.CoreUser) UserResponse {
 		ID:        dataCore.ID,
 		Full_Name: dataCore.Full_Name,
 		Email:     dataCore.Email,
-		Teams:     dataCore.Teams,
-		Role:      dataCore.Role,
-		Status:    dataCore.Status,
+		Teams: user.CoreTeam{
+			ID:        dataCore.Teams.ID,
+			Team_Name: dataCore.Teams.Team_Name,
+		},
+		Role:       dataCore.Role,
+		Status:     dataCore.Status,
+		Permission: dataCore.Permission,
 	}
 }
 
