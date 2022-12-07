@@ -1,4 +1,4 @@
-package user
+package team
 
 type CoreTeam struct {
 	ID        uint

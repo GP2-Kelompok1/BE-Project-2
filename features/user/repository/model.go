@@ -7,6 +7,11 @@ import (
 )
 
 // struct gorm model
+type Team struct {
+	gorm.Model
+	Team_Name string
+	Users     []User
+}
 type User struct {
 	gorm.Model
 	Full_Name  string
@@ -17,11 +22,6 @@ type User struct {
 	Status     string
 	Permission string
 	Teams      Team
-}
-type Team struct {
-	gorm.Model
-	Team_Name string
-	Users     []User
 }
 
 // mengubah struct core ke struct model gorm
