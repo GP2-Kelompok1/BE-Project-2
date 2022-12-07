@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"immersive-dashboard/features/class"
 	_class "immersive-dashboard/features/class"
 
 	"gorm.io/gorm"
@@ -42,9 +43,12 @@ func fromCore(dataCore _class.CoreClass) Class {
 // mengubah struct model gorm ke struct core
 func (dataModel *Class) toCore() _class.CoreClass {
 	return _class.CoreClass{
-		ID:           dataModel.ID,
-		Class_Name:   dataModel.Class_Name,
-		Users:        dataModel.UserID.ID,
+		ID:         dataModel.ID,
+		Class_Name: dataModel.Class_Name,
+		Users: class.CoreUser{
+			ID:        dataModel.UserID,
+			Full_Name: dataModel.Users.Full_Name,
+		},
 		Started_Date: dataModel.Started_Date,
 		End_Date:     dataModel.End_Date,
 	}
