@@ -2,10 +2,10 @@ package mentee
 
 import "time"
 
-type Core struct {
+type CoreMentee struct {
 	ID                    uint
-	Name                  string `validate:"required"`
-	ID_class              uint
+	Mentee_Name           string `validate:"required"`
+	Classes               CoreClass
 	Status                string `validate:"required"`
 	Kategori              string `validate:"required"`
 	Gender                string `validate:"required"`
@@ -24,14 +24,23 @@ type Core struct {
 	CreatedAt             time.Time
 	UpdatedAt             time.Time
 }
+type CoreClass struct {
+	ID         uint
+	Class_Name string
+}
 
 type ServiceInterface interface {
-	GetAll() (data []Core, err error)
-	Create(input Core) (err error)
+	GetAll() (data []CoreMentee, err error)
+	Create(input CoreMentee) (err error)
+	GetById(id int) (data CoreMentee, err error)
+	UpdateMentee(input CoreMentee, id int) (err error)
+	DeleteMentee(id int) (err error)
 }
 
 type RepositoryInterface interface {
-	GetAll() (data []Core, err error)
-	Create(input Core) (row int, err error)
-	GetById(id int) (data Core, err error)
+	GetAll() (data []CoreMentee, err error)
+	Create(input CoreMentee) (row int, err error)
+	GetById(id int) (data CoreMentee, err error)
+	UpdateMentee(input CoreMentee, id int) (err error)
+	DeleteMentee(id int) (row int, err error)
 }
