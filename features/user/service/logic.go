@@ -21,7 +21,6 @@ func New(repo user.RepositoryInterface) user.ServiceInterface {
 
 // Create implements user.ServiceInterface
 func (service *userService) Create(input user.CoreUser) (err error) {
-	input.Role = "user"
 	if errValidate := service.validate.Struct(input); errValidate != nil {
 		return errValidate
 	}
