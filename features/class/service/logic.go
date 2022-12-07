@@ -3,7 +3,6 @@ package service
 import (
 	"errors"
 	"immersive-dashboard/features/class"
-	"immersive-dashboard/features/user"
 
 	"github.com/go-playground/validator/v10"
 )
@@ -33,7 +32,7 @@ func (service *classService) Create(input class.CoreClass) (err error) {
 }
 
 // GetAll implements user.ServiceInterface
-func (service *classService) GetAll() (data []user.CoreUser, err error) {
+func (service *classService) GetAll() (data []class.CoreClass, err error) {
 	data, err = service.classRepository.GetAll()
 	return
 
