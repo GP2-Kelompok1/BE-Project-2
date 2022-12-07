@@ -9,14 +9,19 @@ type ClassResponse struct {
 	Class_Name   string         `json:"class_name"`
 	Users        class.CoreUser `json:"users"`
 	Started_Date string         `json:"started_date"`
+	End_Date     string         `json:"end_date"`
 }
 
 func fromCore(dataCore class.CoreClass) ClassResponse {
 	return ClassResponse{
-		ID:           dataCore.ID,
-		Class_Name:   dataCore.Class_Name,
-		Users:        dataCore.Users,
+		ID:         dataCore.ID,
+		Class_Name: dataCore.Class_Name,
+		Users: class.CoreUser{
+			ID:        dataCore.ID,
+			Full_Name: dataCore.Users.Full_Name,
+		},
 		Started_Date: dataCore.Started_Date,
+		End_Date:     dataCore.End_Date,
 	}
 }
 
