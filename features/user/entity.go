@@ -2,7 +2,7 @@ package user
 
 type CoreUser struct {
 	ID         uint
-	Full_Name  string `validate:"required"`
+	Full_Name  string
 	Email      string `validate:"required,email"`
 	Password   string `validate:"required"`
 	Teams      CoreTeam
