@@ -21,7 +21,7 @@ func New(service user.ServiceInterface, e *echo.Echo) {
 
 	e.GET("/users", handler.GetAll, middlewares.JWTMiddleware())
 	e.POST("/users", handler.Create, middlewares.JWTMiddleware())
-	e.GET("/users/:id", handler.GetById)
+	e.GET("/users/:id", handler.GetById, middlewares.JWTMiddleware())
 	// e.PUT("/users/:id", handler.Update)
 	// e.DELETE("/users/:id", handler.Delete)
 }
