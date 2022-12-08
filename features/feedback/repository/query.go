@@ -66,3 +66,16 @@ func (repo *feedbackRepository) UpdateFeedback(datacore feedback.CoreFeedback, i
 	}
 	return nil
 }
+
+func (repo *feedbackRepository) DeleteFeedback(id int) (row int, err error) {
+	idFeedback := Feedback{}
+
+	tx := repo.db.Delete(&idFeedback, id)
+	if tx.Error != nil {
+		return -1, tx.Error
+	}
+	if tx.RowsAffected == 0 {
+		return -1, errors.New("delete feedback by id failed")
+	}
+	return int(tx.RowsAffected), nil
+}

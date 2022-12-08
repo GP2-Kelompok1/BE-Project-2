@@ -101,3 +101,18 @@ func (delivery *FeedbackDelivery) UpdateData(c echo.Context) error {
 // func (delivery *UserDelivery) Delete(c echo.Context) error {
 
 // }
+
+func (delivery *FeedbackDelivery) DeleteFeedback(c echo.Context) error {
+	id, errConv := strconv.Atoi(c.Param("id"))
+	if errConv != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error conv data "+errConv.Error()))
+	}
+
+	errDel := delivery.feedbackService.DeleteFeedback(id)
+	if errDel != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("error delete feedback"+errDel.Error()))
+	}
+
+	return c.JSON(http.StatusOK, helper.SuccessResponse("success delete data"))
+
+}
