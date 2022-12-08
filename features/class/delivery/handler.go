@@ -21,9 +21,9 @@ func New(service class.ServiceInterface, e *echo.Echo) {
 
 	e.GET("/classes", handler.GetAll, middlewares.JWTMiddleware())
 	e.POST("/classes", handler.Create, middlewares.JWTMiddleware())
-	e.GET("/users/:id", handler.GetById)
-	e.PUT("/users/:id", handler.UpdateData)
-	e.DELETE("/users/:id", handler.DeleteClass)
+	e.GET("/classes/:id", handler.GetById, middlewares.JWTMiddleware())
+	e.PUT("/classes/:id", handler.UpdateData, middlewares.JWTMiddleware())
+	e.DELETE("/classes/:id", handler.DeleteClass, middlewares.JWTMiddleware())
 }
 
 func (delivery *ClassDelivery) GetAll(c echo.Context) error {
