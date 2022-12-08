@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"immersive-dashboard/features/user"
 	_user "immersive-dashboard/features/user"
 
 	"gorm.io/gorm"
@@ -67,7 +66,7 @@ func (dataModel *User) toCore() _user.CoreUser {
 		Role:       dataModel.Role,
 		Status:     dataModel.Status,
 		Permission: dataModel.Permission,
-		Team: user.CoreTeam{
+		Team: _user.CoreTeam{
 			ID:        dataModel.Team.ID,
 			Team_Name: dataModel.Team.Team_Name,
 		},
