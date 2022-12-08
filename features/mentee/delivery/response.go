@@ -7,7 +7,6 @@ type MenteeResponse struct {
 	Mentee_Name           string        `json:"mentee_name"`
 	Classes               ClassResponse `json:"classes"`
 	Status                string        `json:"status"`
-	Category              string        `json:"category"`
 	Gender                string        `json:"gender"`
 	Current_Address       string        `json:"current_address"`
 	Home_Address          string        `json:"home_address"`
@@ -36,7 +35,6 @@ func fromCore(dataCore mentee.CoreMentee) MenteeResponse {
 			Class_Name: dataCore.Class.Class_Name,
 		},
 		Status:                dataCore.Status,
-		Category:              dataCore.Category,
 		Gender:                dataCore.Gender,
 		Current_Address:       dataCore.Current_Address,
 		Home_Address:          dataCore.Home_Address,

@@ -1,13 +1,10 @@
 package mentee
 
-import "time"
-
 type CoreMentee struct {
 	ID                    uint
 	Mentee_Name           string `validate:"required"`
 	Class                 CoreClass
 	Status                string `validate:"required"`
-	Category              string `validate:"required"`
 	Gender                string `validate:"required"`
 	Current_Address       string `validate:"required"`
 	Home_Address          string `validate:"required"`
@@ -21,8 +18,6 @@ type CoreMentee struct {
 	Education_Major       string `validate:"required"`
 	Education_Graduate    string `validate:"required"`
 	Education_Institution string `validate:"required"`
-	CreatedAt             time.Time
-	UpdatedAt             time.Time
 }
 type CoreClass struct {
 	ID           uint
