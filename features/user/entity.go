@@ -20,7 +20,7 @@ type ServiceInterface interface {
 	GetAll() (data []CoreUser, err error)
 	Create(input CoreUser) (err error)
 	GetById(id int) (data CoreUser, err error)
-	// Update(data CoreUser, id int) (string, error)
+	UpdateUser(input CoreUser, id int) (err error)
 	// Delete(id int) (string, error)
 }
 
@@ -28,6 +28,6 @@ type RepositoryInterface interface {
 	GetAll() (data []CoreUser, err error)
 	Create(input CoreUser) (row int, err error)
 	GetById(id int) (data CoreUser, err error)
-	// Update(data CoreUser, id int) (string, error)
+	UpdateUser(input CoreUser, id int) (err error)
 	// Delete(id int) (string, error)
 }
