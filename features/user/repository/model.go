@@ -49,7 +49,7 @@ func fromCore(dataCore _user.CoreUser) User {
 		Full_Name:  dataCore.Full_Name,
 		Email:      dataCore.Email,
 		Password:   dataCore.Password,
-		TeamID:     dataCore.ID,
+		TeamID:     dataCore.Team.ID,
 		Role:       dataCore.Role,
 		Status:     dataCore.Status,
 		Permission: dataCore.Permission,
