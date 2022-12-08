@@ -54,3 +54,16 @@ func (repo *teamRepository) GetById(id int) (data team.CoreTeam, err error) {
 	IdTeamCore = IdTeam.toCore()
 	return IdTeamCore, nil
 }
+
+// update team
+func (repo *teamRepository) UpdateTeam(datacore team.CoreTeam, id int) (err error) {
+	userGorm := fromCore(datacore)
+	tx := repo.db.Where("id= ?", id).Updates(userGorm)
+	if tx.Error != nil {
+		return tx.Error
+	}
+	if tx.RowsAffected == 0 {
+		return errors.New("update user failed")
+	}
+	return nil
+}

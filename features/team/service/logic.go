@@ -45,3 +45,12 @@ func (service *teamService) GetById(id int) (data team.CoreTeam, err error) {
 	}
 	return data, nil
 }
+
+func (service *teamService) UpdateTeam(dataCore team.CoreTeam, id int) (err error) {
+	errUpdate := service.teamRepository.UpdateTeam(dataCore, id)
+	if errUpdate != nil {
+		return errors.New("failed update data, error query")
+	}
+	return nil
+
+}
