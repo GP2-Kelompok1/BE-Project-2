@@ -24,7 +24,7 @@ type ServiceInterface interface {
 	Create(input CoreClass) (err error)
 	GetById(id int) (data CoreClass, err error)
 	UpdateClass(input CoreClass, id int) (err error)
-	// Delete(id int) (string, error)
+	DeleteClass(id int) (err error)
 }
 
 type RepositoryInterface interface {
@@ -32,5 +32,5 @@ type RepositoryInterface interface {
 	Create(input CoreClass) (row int, err error)
 	GetById(id int) (data CoreClass, err error)
 	UpdateClass(input CoreClass, id int) (err error)
-	// Delete(id int) (string, error)
+	DeleteClass(id int) (row int, err error)
 }
