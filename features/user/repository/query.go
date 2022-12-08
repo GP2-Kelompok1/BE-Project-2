@@ -43,6 +43,14 @@ func (repo *userRepository) GetAll() (data []user.CoreUser, err error) {
 }
 
 // GetById implements user.RepositoryInterface
-func (*userRepository) GetById(id int) (data user.CoreUser, err error) {
-	panic("unimplemented")
+func (repo *userRepository) GetById(id int) (data user.CoreUser, err error) {
+	var IdUser User
+	var IdUserCore = user.CoreUser{}
+	IdUser.ID = uint(id)
+	tx := repo.db.First(&IdUser, IdUser.ID)
+	if tx.Error != nil {
+		return IdUserCore, tx.Error
+	}
+	IdUserCore = IdUser.toCore()
+	return IdUserCore, nil
 }
