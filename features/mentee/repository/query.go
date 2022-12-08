@@ -46,7 +46,7 @@ func (repo *menteeRepository) GetById(id int) (data mentee.CoreMentee, err error
 	var IdMentee Mentee
 	var IdMenteeCore = mentee.CoreMentee{}
 	IdMentee.ID = uint(id)
-	tx := repo.db.First(&IdMentee, IdMentee.ID)
+	tx := repo.db.Preload("Class").First(&IdMentee, IdMentee.ID)
 	if tx.Error != nil {
 		return IdMenteeCore, tx.Error
 	}
