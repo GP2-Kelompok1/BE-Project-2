@@ -19,7 +19,7 @@ func New(service feedback.ServiceInterface, e *echo.Echo) {
 	}
 
 	e.GET("/feedbacks", handler.GetAll, middlewares.JWTMiddleware())
-	e.POST("/feedbacks", handler.Create)
+	e.POST("/feedbacks", handler.Create, middlewares.JWTMiddleware())
 	// e.GET("/users/:id", handler.GetById)
 	// e.PUT("/users/:id", handler.Update)
 	// e.DELETE("/users/:id", handler.Delete)
