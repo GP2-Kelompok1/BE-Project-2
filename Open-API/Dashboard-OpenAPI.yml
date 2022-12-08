@@ -14,8 +14,8 @@ servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/FEBRYANZAINAL/Immersive-Dashboard-OpenAPI/1.0.0
-  - description: Real BE servers (in progress)
-    url: http:// #38.8.1.12:80
+  - description: Real Immersive-Dashboard servers 
+    url: http:// 34.87.101.252:80
     variables:
       environment:
         default: dev
@@ -37,6 +37,39 @@ tags:
     description: "Manajemen data Feedbacks"
 
 paths:
+  /Auth:
+    post:
+      tags: 
+        - Auth
+      summary: Login to system
+      security:
+         - JWTAuth: []
+      requestBody: 
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              type: object
+            example:
+              email: "joko@mail.com"
+              password: "qwerty123"
+      responses:
+        '200': 
+          description: Success login.
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: "success login"
+                data: 
+                    id: 12345
+                    full_name: "joko"
+                    email: "joko@mail.com"
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
   /users:
     post:
       tags:
@@ -49,6 +82,7 @@ paths:
           application/json:
             schema:
               type: object
+              $ref: '#/components/schemas/Users'
               example:
                 full_name: "agus"
                 email: "agus@mail.com"
@@ -370,7 +404,7 @@ paths:
         - JWTAuth: []
       parameters:
         - name: id_team
-          description: "id team"
+          description: "id teams"
           required: true
           in: path
           schema:
@@ -617,7 +651,6 @@ paths:
                   message: "success update teams"
         '404':
           $ref: '#/components/responses/404'
-
   /mentees:
     post:
       tags:
@@ -1078,10 +1111,6 @@ components:
           format: uint
         started_date:
           type: string
-          enum:
-            - superuser
-            - user
-       
     Mentee:
       type: object
       properties:
@@ -1098,8 +1127,6 @@ components:
           enum:
            - active
            - not-active
-        kategori:
-          type: string
         gender:
           type: integer
         current_address:
@@ -1116,6 +1143,18 @@ components:
           type: string
         education_type:
           type: string
+          enum:
+            - Interview
+            - Join class
+            - Unit 1
+            - Unit 2
+            - Unit 3
+            - Repeat unit 1
+            - Repeat unit 2
+            - Repeat unit 3
+            - Placement
+            - Eliminated
+            - Graduated
         education_major:
           type: string
         education_graduate:
@@ -1141,7 +1180,6 @@ components:
           type: string
         changed_status:
           type: string
-
     ResponseWithoutData:
       type: object
       properties:
