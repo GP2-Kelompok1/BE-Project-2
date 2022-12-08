@@ -47,7 +47,7 @@ func (repo *classRepository) GetById(id int) (data class.CoreClass, err error) {
 	var IdClass Class
 	var IdClassCore = class.CoreClass{}
 	IdClass.ID = uint(id)
-	tx := repo.db.First(&IdClass, IdClass.ID)
+	tx := repo.db.Preload("User").First(&IdClass, IdClass.ID)
 	if tx.Error != nil {
 		return IdClassCore, tx.Error
 	}
