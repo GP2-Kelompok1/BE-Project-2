@@ -11,7 +11,6 @@ type Mentee struct {
 	gorm.Model
 	Mentee_Name           string
 	ClassID               uint
-	Classes               Class
 	Status                string
 	Category              string
 	Gender                string
@@ -27,6 +26,7 @@ type Mentee struct {
 	Education_Major       string
 	Education_Graduate    string
 	Education_Institution string
+	Classes               Class
 }
 type Class struct {
 	gorm.Model
@@ -42,7 +42,6 @@ type Feedback struct {
 	Description    string
 	Mentee_Status  string
 	Changed_Status string
-	Mentees        Mentee
 }
 
 // mengubah struct core ke struct model gorm

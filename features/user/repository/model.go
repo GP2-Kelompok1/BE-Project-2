@@ -17,9 +17,9 @@ type User struct {
 	Role       string
 	Status     string
 	Permission string
-	Teams      Team
 	Classes    []Class
 	Feedbacks  []Feedback
+	Teams      Team
 }
 type Team struct {
 	gorm.Model
@@ -32,7 +32,6 @@ type Class struct {
 	UserID       uint
 	Started_Date string
 	End_Date     string
-	Users        User
 }
 
 type Feedback struct {
@@ -42,7 +41,6 @@ type Feedback struct {
 	Description    string
 	Mentee_Status  string
 	Changed_Status string
-	Users          User
 }
 
 // mengubah struct core ke struct model gorm
