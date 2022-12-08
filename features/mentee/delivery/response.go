@@ -3,33 +3,37 @@ package delivery
 import "immersive-dashboard/features/mentee"
 
 type MenteeResponse struct {
-	ID                    uint             `json:"id"`
-	Mentee_Name           string           `json:"mentee_name"`
-	Classes               mentee.CoreClass `json:"classes"`
-	Status                string           `json:"status"`
-	Category              string           `json:"category"`
-	Gender                string           `json:"gender"`
-	Current_Address       string           `json:"current_address"`
-	Home_Address          string           `json:"home_address"`
-	Email                 string           `json:"email"`
-	Telegram              string           `json:"telegram"`
-	Phone                 string           `json:"phone"`
-	Emergency_Name        string           `json:"emergency_name"`
-	Emergency_Phone       string           `json:"emergency-phone"`
-	Emergency_Status      string           `json:"emergency_status"`
-	Education_Type        string           `json:"education_type"`
-	Education_Major       string           `json:"education_major"`
-	Education_Graduate    string           `json:"education_graduate"`
-	Education_Institution string           `json:"education_institution"`
+	ID                    uint          `json:"id"`
+	Mentee_Name           string        `json:"mentee_name"`
+	Classes               ClassResponse `json:"classes"`
+	Status                string        `json:"status"`
+	Category              string        `json:"category"`
+	Gender                string        `json:"gender"`
+	Current_Address       string        `json:"current_address"`
+	Home_Address          string        `json:"home_address"`
+	Email                 string        `json:"email"`
+	Telegram              string        `json:"telegram"`
+	Phone                 string        `json:"phone"`
+	Emergency_Name        string        `json:"emergency_name"`
+	Emergency_Phone       string        `json:"emergency-phone"`
+	Emergency_Status      string        `json:"emergency_status"`
+	Education_Type        string        `json:"education_type"`
+	Education_Major       string        `json:"education_major"`
+	Education_Graduate    string        `json:"education_graduate"`
+	Education_Institution string        `json:"education_institution"`
+}
+type ClassResponse struct {
+	ID         uint   `json:"id"`
+	Class_Name string `json:"class_name"`
 }
 
 func fromCore(dataCore mentee.CoreMentee) MenteeResponse {
 	return MenteeResponse{
 		ID:          dataCore.ID,
 		Mentee_Name: dataCore.Mentee_Name,
-		Classes: mentee.CoreClass{
-			ID:         dataCore.Classes.ID,
-			Class_Name: dataCore.Classes.Class_Name,
+		Classes: ClassResponse{
+			ID:         dataCore.Class.ID,
+			Class_Name: dataCore.Class.Class_Name,
 		},
 		Status:                dataCore.Status,
 		Category:              dataCore.Category,

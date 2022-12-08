@@ -50,7 +50,7 @@ func fromCore(dataCore _mentee.CoreMentee) Mentee {
 	userGorm := Mentee{
 
 		Mentee_Name:           dataCore.Mentee_Name,
-		ClassID:               dataCore.Classes.ID,
+		ClassID:               dataCore.Class.ID,
 		Status:                dataCore.Status,
 		Category:              dataCore.Category,
 		Gender:                dataCore.Gender,
@@ -75,8 +75,8 @@ func (dataModel *Mentee) toCore() _mentee.CoreMentee {
 	return _mentee.CoreMentee{
 		ID:          dataModel.ID,
 		Mentee_Name: dataModel.Mentee_Name,
-		Classes: _mentee.CoreClass{
-			ID:         dataModel.ClassID,
+		Class: _mentee.CoreClass{
+			ID:         dataModel.Class.ID,
 			Class_Name: dataModel.Class.Class_Name,
 		},
 		Status:                dataModel.Status,
