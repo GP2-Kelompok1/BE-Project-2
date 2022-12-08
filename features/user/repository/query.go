@@ -5,6 +5,7 @@ import (
 	"immersive-dashboard/features/user"
 
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type userRepository struct {
@@ -34,7 +35,7 @@ func (repo *userRepository) Create(input user.CoreUser) (row int, err error) {
 func (repo *userRepository) GetAll() (data []user.CoreUser, err error) {
 	var users []User
 
-	tx := repo.db.Preload("team").Find(&users)
+	tx := repo.db.Preload("team").Preload(clause.Associations).Find(&users)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
