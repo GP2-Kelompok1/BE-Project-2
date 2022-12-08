@@ -60,22 +60,22 @@ func fromCore(dataCore _user.CoreUser) User {
 // mengubah struct model gorm ke struct core
 func (dataModel *User) toCore() _user.CoreUser {
 	return _user.CoreUser{
-		ID:         dataModel.ID,
-		Full_Name:  dataModel.Full_Name,
-		Email:      dataModel.Email,
-		Role:       dataModel.Role,
-		Status:     dataModel.Status,
-		Permission: dataModel.Permission,
+		ID:        dataModel.ID,
+		Full_Name: dataModel.Full_Name,
+		Email:     dataModel.Email,
+		TeamID:    dataModel.TeamID,
 		Team: _user.CoreTeam{
 			ID:        dataModel.Team.ID,
 			Team_Name: dataModel.Team.Team_Name,
 		},
+		Role:       dataModel.Role,
+		Status:     dataModel.Status,
+		Permission: dataModel.Permission,
 	}
 }
 
 // func (dataModel *Team) toCoreTeam() _user.CoreTeam {
 // 	return _user.CoreTeam{
-// 		ID:        dataModel.ID,
 // 		Team_Name: dataModel.Team_Name,
 // 	}
 // }
