@@ -19,11 +19,12 @@ type User struct {
 	Permission string
 	Classes    []Class
 	Feedbacks  []Feedback
-	Teams      Team
+	Team       Team
 }
 type Team struct {
 	gorm.Model
 	Team_Name string
+	Users     []User
 }
 type Class struct {
 	gorm.Model
@@ -64,7 +65,7 @@ func (dataModel *User) toCore() _user.CoreUser {
 		Email:     dataModel.Email,
 		Teams: _user.CoreTeam{ // <<< lihat ini
 			ID:        dataModel.TeamID,
-			Team_Name: dataModel.Teams.Team_Name,
+			Team_Name: dataModel.Team.Team_Name,
 		},
 		Role:       dataModel.Role,
 		Status:     dataModel.Status,

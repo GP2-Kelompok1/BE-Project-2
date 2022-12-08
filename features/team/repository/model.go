@@ -10,6 +10,7 @@ import (
 type Team struct {
 	gorm.Model
 	Team_Name string
+	Users     []User
 }
 
 type User struct {
