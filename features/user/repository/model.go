@@ -63,7 +63,6 @@ func (dataModel *User) toCore() _user.CoreUser {
 		ID:        dataModel.ID,
 		Full_Name: dataModel.Full_Name,
 		Email:     dataModel.Email,
-		TeamID:    dataModel.TeamID,
 		Team: _user.CoreTeam{
 			ID:        dataModel.Team.ID,
 			Team_Name: dataModel.Team.Team_Name,
