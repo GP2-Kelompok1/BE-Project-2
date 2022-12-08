@@ -21,7 +21,7 @@ func New(service feedback.ServiceInterface, e *echo.Echo) {
 
 	e.GET("/feedbacks", handler.GetAll, middlewares.JWTMiddleware())
 	e.POST("/feedbacks", handler.Create, middlewares.JWTMiddleware())
-	e.GET("/users/:id", handler.GetById, middlewares.JWTMiddleware())
+	e.GET("/feedbacks/:id", handler.GetById, middlewares.JWTMiddleware())
 	e.PUT("/feedbacks/:id", handler.UpdateData, middlewares.JWTMiddleware())
 	e.DELETE("/feedbacks/:id", handler.DeleteFeedback, middlewares.JWTMiddleware())
 }
