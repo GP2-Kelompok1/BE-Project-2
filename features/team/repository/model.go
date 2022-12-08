@@ -10,6 +10,19 @@ import (
 type Team struct {
 	gorm.Model
 	Team_Name string
+	Users     []User
+}
+
+type User struct {
+	gorm.Model
+	Full_Name  string
+	Email      string
+	Password   string
+	TeamID     uint // <<tidak ada underscore (default setting)
+	Role       string
+	Status     string
+	Permission string
+	Teams      Team
 }
 
 // mengubah struct core ke struct model gorm
