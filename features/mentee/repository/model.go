@@ -27,6 +27,7 @@ type Mentee struct {
 	Education_Graduate    string
 	Education_Institution string
 	Classes               Class
+	Feedbacks             []Feedback
 }
 type Class struct {
 	gorm.Model
