@@ -43,17 +43,17 @@ func (repo *feedbackRepository) GetAll() (data []feedback.CoreFeedback, err erro
 }
 
 // GetById implements user.RepositoryInterface
-// func (repo *feedbackRepository) GetById(id int) (data feedback.CoreFeedback, err error) {
-// 	var IdFeedback Feedback
-// 	var IdFeedbackCore = feedback.CoreFeedback{}
-// 	IdFeedback.ID = uint(id)
-// 	tx := repo.db.First(&IdFeedback, IdFeedback.ID)
-// 	if tx.Error != nil {
-// 		return IdFeedbackCore, tx.Error
-// 	}
-// 	IdFeedbackCore = IdFeedback.toCore()
-// 	return IdFeedbackCore, nil
-// }
+func (repo *feedbackRepository) GetById(id int) (data feedback.CoreFeedback, err error) {
+	var IdFeedback Feedback
+	var IdFeedbackCore = feedback.CoreFeedback{}
+	IdFeedback.ID = uint(id)
+	tx := repo.db.Preload("Mentee").Preload("User").First(&IdFeedback, IdFeedback.ID)
+	if tx.Error != nil {
+		return IdFeedbackCore, tx.Error
+	}
+	IdFeedbackCore = IdFeedback.toCore()
+	return IdFeedbackCore, nil
+}
 
 func (repo *feedbackRepository) UpdateFeedback(datacore feedback.CoreFeedback, id int) (err error) {
 	userGorm := fromCore(datacore)

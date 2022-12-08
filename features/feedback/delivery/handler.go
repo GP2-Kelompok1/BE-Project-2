@@ -21,7 +21,7 @@ func New(service feedback.ServiceInterface, e *echo.Echo) {
 
 	e.GET("/feedbacks", handler.GetAll, middlewares.JWTMiddleware())
 	e.POST("/feedbacks", handler.Create, middlewares.JWTMiddleware())
-	// e.GET("/users/:id", handler.GetById)
+	e.GET("/users/:id", handler.GetById, middlewares.JWTMiddleware())
 	e.PUT("/feedbacks/:id", handler.UpdateData, middlewares.JWTMiddleware())
 	e.DELETE("/feedbacks/:id", handler.DeleteFeedback, middlewares.JWTMiddleware())
 }
@@ -52,19 +52,19 @@ func (delivery *FeedbackDelivery) Create(c echo.Context) error {
 	return c.JSON(http.StatusCreated, helper.SuccessResponse("success create data"))
 }
 
-// func (delivery *FeedbackDelivery) GetById(c echo.Context) error {
-// 	id, errBind := strconv.Atoi(c.Param("id"))
-// 	if errBind != nil {
-// 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
-// 	}
+func (delivery *FeedbackDelivery) GetById(c echo.Context) error {
+	id, errBind := strconv.Atoi(c.Param("id"))
+	if errBind != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
+	}
 
-// 	IdFeedback, err := delivery.feedbackService.GetById(id)
-// 	dataResponse := fromCore(IdFeedback)
-// 	if err != nil {
-// 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
-// 	}
-// 	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success get users", dataResponse))
-// }
+	IdFeedback, err := delivery.feedbackService.GetById(id)
+	dataResponse := fromCore(IdFeedback)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
+	}
+	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success get users", dataResponse))
+}
 
 func (delivery *FeedbackDelivery) UpdateData(c echo.Context) error {
 	id, errConv := strconv.Atoi(c.Param("id"))
