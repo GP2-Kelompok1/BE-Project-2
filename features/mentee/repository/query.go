@@ -21,7 +21,7 @@ func New(db *gorm.DB) mentee.RepositoryInterface {
 func (repo *menteeRepository) GetAll() (data []mentee.CoreMentee, err error) {
 	var mentees []Mentee
 
-	tx := repo.db.Find(&mentees)
+	tx := repo.db.Preload("Feedbacks").Find(&mentees)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}

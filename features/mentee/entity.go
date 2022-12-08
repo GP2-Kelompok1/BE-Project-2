@@ -5,7 +5,7 @@ import "time"
 type CoreMentee struct {
 	ID                    uint
 	Mentee_Name           string `validate:"required"`
-	Classes               CoreClass
+	Class                 CoreClass
 	Status                string `validate:"required"`
 	Category              string `validate:"required"`
 	Gender                string `validate:"required"`
@@ -25,8 +25,10 @@ type CoreMentee struct {
 	UpdatedAt             time.Time
 }
 type CoreClass struct {
-	ID         uint
-	Class_Name string
+	ID           uint
+	Class_Name   string
+	Started_Date string
+	End_Date     string
 }
 
 type ServiceInterface interface {
