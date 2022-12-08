@@ -10,7 +10,7 @@ type ServiceInterface interface {
 	Create(input CoreTeam) (err error)
 	GetById(id int) (data CoreTeam, err error)
 	UpdateTeam(input CoreTeam, id int) (err error)
-	// Delete(id int) (string, error)
+	DeleteTeam(id int) (err error)
 }
 
 type RepositoryInterface interface {
@@ -18,5 +18,5 @@ type RepositoryInterface interface {
 	Create(input CoreTeam) (row int, err error)
 	GetById(id int) (data CoreTeam, err error)
 	UpdateTeam(input CoreTeam, id int) (err error)
-	// Delete(id int) (string, error)
+	DeleteTeam(id int) (row int, err error)
 }

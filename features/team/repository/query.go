@@ -67,3 +67,16 @@ func (repo *teamRepository) UpdateTeam(datacore team.CoreTeam, id int) (err erro
 	}
 	return nil
 }
+
+func (repo *teamRepository) DeleteTeam(id int) (row int, err error) {
+	idTeam := Team{}
+
+	tx := repo.db.Delete(&idTeam, id)
+	if tx.Error != nil {
+		return -1, tx.Error
+	}
+	if tx.RowsAffected == 0 {
+		return -1, errors.New("delete team by id failed")
+	}
+	return int(tx.RowsAffected), nil
+}

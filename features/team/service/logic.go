@@ -54,3 +54,11 @@ func (service *teamService) UpdateTeam(dataCore team.CoreTeam, id int) (err erro
 	return nil
 
 }
+
+func (service *teamService) DeleteTeam(id int) (err error) {
+	_, errDel := service.teamRepository.DeleteTeam(id)
+	if errDel != nil {
+		return errors.New("failed delete team, error query")
+	}
+	return nil
+}

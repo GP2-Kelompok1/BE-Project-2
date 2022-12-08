@@ -23,7 +23,7 @@ func New(service team.ServiceInterface, e *echo.Echo) {
 	e.POST("/teams", handler.Create, middlewares.JWTMiddleware())
 	e.GET("/users/:id", handler.GetById)
 	e.PUT("/users/:id", handler.UpdateData)
-	// e.DELETE("/users/:id", handler.Delete)
+	e.DELETE("/users/:id", handler.DeleteTeam)
 }
 
 func (delivery *TeamDelivery) GetAll(c echo.Context) error {
@@ -83,6 +83,21 @@ func (delivery *TeamDelivery) UpdateData(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error Db update "+errUpt.Error()))
 	}
 	return c.JSON(http.StatusOK, helper.SuccessResponse("success update data"))
+
+}
+
+func (delivery *TeamDelivery) DeleteTeam(c echo.Context) error {
+	id, errConv := strconv.Atoi(c.Param("id"))
+	if errConv != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error conv data "+errConv.Error()))
+	}
+
+	errDel := delivery.teamService.DeleteTeam(id)
+	if errDel != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("error delete team"+errDel.Error()))
+	}
+
+	return c.JSON(http.StatusOK, helper.SuccessResponse("success delete data"))
 
 }
 
