@@ -56,8 +56,8 @@ type Mentee struct {
 // mengubah struct core ke struct model gorm
 func fromCore(dataCore _feedback.CoreFeedback) Feedback {
 	feedbackGorm := Feedback{
-		MenteeID:       dataCore.MenteeID,
-		UserID:         dataCore.UserID,
+		MenteeID:       dataCore.Mentees.ID,
+		UserID:         dataCore.Users.ID,
 		Description:    dataCore.Description,
 		Mentee_Status:  dataCore.Mentee_Status,
 		Changed_Status: dataCore.Changed_Status,
@@ -70,11 +70,11 @@ func (dataModel *Feedback) toCore() _feedback.CoreFeedback {
 	return _feedback.CoreFeedback{
 		ID: dataModel.ID,
 		Mentees: _feedback.CoreMentee{
-			ID:          dataModel.MenteeID,
+			ID:          dataModel.Mentee.ID,
 			Mentee_Name: dataModel.Mentee.Mentee_Name,
 		},
 		Users: _feedback.CoreUser{
-			ID:        dataModel.UserID,
+			ID:        dataModel.User.ID,
 			Full_Name: dataModel.User.Full_Name,
 		},
 		Description:    dataModel.Description,

@@ -5,22 +5,31 @@ import (
 )
 
 type FeedbackResponse struct {
-	ID             uint                `json:"id"`
-	Mentees        feedback.CoreMentee `json:"mentees"`
-	Users          feedback.CoreUser   `json:"users"`
-	Description    string              `json:"description"`
-	Mentee_Status  string              `json:"mentee_status"`
-	Changed_Status string              `json:"changed_status"`
+	ID             uint           `json:"id"`
+	Mentees        MenteeResponse `json:"mentees"`
+	Users          UserResponse   `json:"users"`
+	Description    string         `json:"description"`
+	Mentee_Status  string         `json:"mentee_status"`
+	Changed_Status string         `json:"changed_status"`
+}
+type MenteeResponse struct {
+	ID          uint   `json:"id"`
+	Mentee_Name string `json:"mentee_name"`
+}
+
+type UserResponse struct {
+	ID        uint   `json:"id"`
+	Full_Name string `json:"full_name"`
 }
 
 func fromCore(dataCore feedback.CoreFeedback) FeedbackResponse {
 	return FeedbackResponse{
 		ID: dataCore.ID,
-		Mentees: feedback.CoreMentee{
+		Mentees: MenteeResponse{
 			ID:          dataCore.Mentees.ID,
 			Mentee_Name: dataCore.Mentees.Mentee_Name,
 		},
-		Users: feedback.CoreUser{
+		Users: UserResponse{
 			ID:        dataCore.Users.ID,
 			Full_Name: dataCore.Users.Full_Name,
 		},
