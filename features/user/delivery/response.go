@@ -8,6 +8,8 @@ type UserResponse struct {
 	ID         uint         `json:"id"`
 	Full_Name  string       `json:"full_name"`
 	Email      string       `json:"email"`
+	TeamID     uint         `json:"team_id"`
+	Team_Name  string       `json:"team_name"`
 	Teams      TeamResponse `json:"teams"`
 	Role       string       `json:"role"`
 	Status     string       `json:"status"`
@@ -24,6 +26,8 @@ func fromCore(dataCore user.CoreUser) UserResponse {
 		ID:        dataCore.ID,
 		Full_Name: dataCore.Full_Name,
 		Email:     dataCore.Email,
+		TeamID:    dataCore.Team.ID,
+		Team_Name: dataCore.Team.Team_Name,
 		Teams: TeamResponse{
 			ID:        dataCore.Team.ID,
 			Team_Name: dataCore.Team.Team_Name,
