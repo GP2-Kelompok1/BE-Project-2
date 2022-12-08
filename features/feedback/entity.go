@@ -24,15 +24,15 @@ type CoreMentee struct {
 type ServiceInterface interface {
 	GetAll() (data []CoreFeedback, err error)
 	Create(input CoreFeedback) (err error)
-	// GetById(id int) (data CoreUser, err error)
-	// Update(data CoreUser, id int) (string, error)
+	// GetById(id int) (data CoreFeedback, err error)
+	UpdateFeedback(input CoreFeedback, id int) (err error)
 	// Delete(id int) (string, error)
 }
 
 type RepositoryInterface interface {
 	GetAll() (data []CoreFeedback, err error)
 	Create(input CoreFeedback) (row int, err error)
-	// GetById(id int) (data CoreUser, err error)
-	// Update(data CoreUser, id int) (string, error)
+	// GetById(id int) (data CoreFeedback, err error)
+	UpdateFeedback(input CoreFeedback, id int) (err error)
 	// Delete(id int) (string, error)
 }

@@ -61,7 +61,7 @@ func (repo *menteeRepository) UpdateMentee(datacore mentee.CoreMentee, id int) (
 		return tx.Error
 	}
 	if tx.RowsAffected == 0 {
-		return errors.New("update user failed")
+		return errors.New("update mentee failed")
 	}
 	return nil
 }
