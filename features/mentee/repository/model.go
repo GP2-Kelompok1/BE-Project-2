@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"immersive-dashboard/features/mentee"
 	_mentee "immersive-dashboard/features/mentee"
 
 	"gorm.io/gorm"
@@ -10,10 +11,10 @@ import (
 type Mentee struct {
 	gorm.Model
 	Mentee_Name           string
-	ID_Class              uint
+	ClassID               uint
 	Classes               Class
 	Status                string
-	Kategori              string
+	Category              string
 	Gender                string
 	Current_Address       string
 	Home_Address          string
@@ -40,9 +41,9 @@ func fromCore(dataCore _mentee.CoreMentee) Mentee {
 	userGorm := Mentee{
 
 		Mentee_Name:           dataCore.Mentee_Name,
-		ID_Class:              dataCore.Classes.ID,
+		ClassID:               dataCore.Classes.ID,
 		Status:                dataCore.Status,
-		Kategori:              dataCore.Kategori,
+		Category:              dataCore.Category,
 		Gender:                dataCore.Gender,
 		Current_Address:       dataCore.Current_Address,
 		Home_Address:          dataCore.Home_Address,
@@ -63,10 +64,14 @@ func fromCore(dataCore _mentee.CoreMentee) Mentee {
 // mengubah struct model gorm ke struct core
 func (dataModel *Mentee) toCore() _mentee.CoreMentee {
 	return _mentee.CoreMentee{
-		ID:                    dataModel.ID,
-		Mentee_Name:           dataModel.Mentee_Name,
+		ID:          dataModel.ID,
+		Mentee_Name: dataModel.Mentee_Name,
+		Classes: mentee.CoreClass{
+			ID:         dataModel.ClassID,
+			Class_Name: dataModel.Classes.Class_Name,
+		},
 		Status:                dataModel.Status,
-		Kategori:              dataModel.Kategori,
+		Category:              dataModel.Category,
 		Gender:                dataModel.Gender,
 		Current_Address:       dataModel.Current_Address,
 		Home_Address:          dataModel.Home_Address,

@@ -6,9 +6,9 @@ import (
 
 type MenteeRequest struct {
 	Mentee_Name           string `json:"mentee_name"`
-	ID_Class              uint   `json:"id_class"`
+	ClassID               uint   `json:"class_id"`
 	Status                string `json:"status"`
-	Kategori              string `json:"kategori"`
+	Category              string `json:"category"`
 	Gender                string `json:"gender"`
 	Current_Address       string `json:"current_address"`
 	Home_Address          string `json:"home_address"`
@@ -28,10 +28,10 @@ func toCore(data MenteeRequest) mentee.CoreMentee {
 	return mentee.CoreMentee{
 		Mentee_Name: data.Mentee_Name,
 		Classes: mentee.CoreClass{
-			ID: data.ID_Class,
+			ID: data.ClassID,
 		},
 		Status:                data.Status,
-		Kategori:              data.Kategori,
+		Category:              data.Category,
 		Gender:                data.Gender,
 		Current_Address:       data.Current_Address,
 		Home_Address:          data.Home_Address,

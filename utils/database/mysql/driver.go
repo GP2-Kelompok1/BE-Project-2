@@ -3,6 +3,8 @@ package mysql
 import (
 	"fmt"
 	"immersive-dashboard/config"
+	classRepo "immersive-dashboard/features/class/repository"
+	menteeRepo "immersive-dashboard/features/mentee/repository"
 	teamRepo "immersive-dashboard/features/team/repository"
 	userRepo "immersive-dashboard/features/user/repository"
 	"log"
@@ -24,5 +26,7 @@ func InitDB(cfg *config.AppConfig) *gorm.DB {
 func DBMigration(db *gorm.DB) {
 	db.AutoMigrate(&teamRepo.Team{})
 	db.AutoMigrate(&userRepo.User{})
+	db.AutoMigrate(&classRepo.Class{})
+	db.AutoMigrate(&menteeRepo.Mentee{})
 
 }
