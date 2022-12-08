@@ -73,6 +73,13 @@ func (dataModel *User) toCore() _user.CoreUser {
 	}
 }
 
+func (dataModel *Team) toCoreTeam() _user.CoreTeam {
+	return _user.CoreTeam{
+		ID:        dataModel.ID,
+		Team_Name: dataModel.Team_Name,
+	}
+}
+
 // mengubah slice struct model gorm ke slice struct core
 func toCoreList(dataModel []User) []_user.CoreUser {
 	var dataCore []_user.CoreUser
