@@ -34,7 +34,7 @@ func (repo *feedbackRepository) Create(input feedback.CoreFeedback) (row int, er
 func (repo *feedbackRepository) GetAll() (data []feedback.CoreFeedback, err error) {
 	var feedbacks []Feedback
 
-	tx := repo.db.Find(&feedbacks)
+	tx := repo.db.Preload("Mentee").Preload("User").Find(&feedbacks)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
