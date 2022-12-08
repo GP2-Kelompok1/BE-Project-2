@@ -45,3 +45,12 @@ func (service *userService) GetById(id int) (data user.CoreUser, err error) {
 	}
 	return data, nil
 }
+
+func (service *userService) UpdateUser(dataCore user.CoreUser, id int) (err error) {
+	errUpdate := service.userRepository.UpdateUser(dataCore, id)
+	if errUpdate != nil {
+		return errors.New("failed update data, error query")
+	}
+	return nil
+
+}

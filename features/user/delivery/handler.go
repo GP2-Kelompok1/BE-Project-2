@@ -22,7 +22,7 @@ func New(service user.ServiceInterface, e *echo.Echo) {
 	e.GET("/users", handler.GetAll, middlewares.JWTMiddleware())
 	e.POST("/users", handler.Create, middlewares.JWTMiddleware())
 	e.GET("/users/:id", handler.GetById, middlewares.JWTMiddleware())
-	// e.PUT("/users/:id", handler.Update)
+	e.PUT("/users/:id", handler.UpdateData, middlewares.JWTMiddleware())
 	// e.DELETE("/users/:id", handler.Delete)
 }
 
@@ -79,4 +79,24 @@ func (delivery *UserDelivery) GetById(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
 	}
 	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success get users", dataResponse))
+}
+
+func (delivery *UserDelivery) UpdateData(c echo.Context) error {
+	id, errConv := strconv.Atoi(c.Param("id"))
+	if errConv != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error conv data "+errConv.Error()))
+	}
+
+	userInput := UserRequest{}
+	errBind := c.Bind(&userInput)
+	if errBind != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
+	}
+
+	dataCore := toCore(userInput)
+	errUpt := delivery.userService.UpdateUser(dataCore, id)
+	if errUpt != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error Db update "+errUpt.Error()))
+	}
+	return c.JSON(http.StatusOK, helper.SuccessResponse("success update data"))
 }
