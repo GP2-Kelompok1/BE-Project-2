@@ -22,10 +22,10 @@ func New(service mentee.ServiceInterface, e *echo.Echo) {
 
 	//delivery > service > repo > service > delivery
 	e.GET("/mentees", handler.GetAll, middlewares.JWTMiddleware())
-	e.POST("/mentees", handler.Create)
-	e.GET("/mentees/:id", handler.GetById)
-	e.PUT("/mentees/:id", handler.UpdateData)
-	e.DELETE("/mentees/:id", handler.DeleteMentee)
+	e.POST("/mentees", handler.Create, middlewares.JWTMiddleware())
+	e.GET("/mentees/:id", handler.GetById, middlewares.JWTMiddleware())
+	e.PUT("/mentees/:id", handler.UpdateData, middlewares.JWTMiddleware())
+	e.DELETE("/mentees/:id", handler.DeleteMentee, middlewares.JWTMiddleware())
 }
 
 // fungsi menampilkan semua user
