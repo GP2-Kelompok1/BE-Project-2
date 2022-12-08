@@ -66,7 +66,7 @@ func (dataModel *Class) toCore() _class.CoreClass {
 		ID:         dataModel.ID,
 		Class_Name: dataModel.Class_Name,
 		Users: _class.CoreUser{
-			ID:        dataModel.UserID,
+			ID:        dataModel.User.ID,
 			Full_Name: dataModel.User.Full_Name,
 		},
 		Started_Date: dataModel.Started_Date,

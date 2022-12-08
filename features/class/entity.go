@@ -9,14 +9,8 @@ type CoreClass struct {
 }
 
 type CoreUser struct {
-	ID         uint
-	Full_Name  string
-	Email      string
-	Password   string
-	TeamID     uint
-	Role       string
-	Status     string
-	Permission string
+	ID        uint
+	Full_Name string
 }
 
 type ServiceInterface interface {
