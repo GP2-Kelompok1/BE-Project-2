@@ -6,10 +6,10 @@ type CoreUser struct {
 	Email      string `validate:"required,email"`
 	Password   string `validate:"required"`
 	TeamID     uint
-	Teams      []CoreTeam
 	Role       string
 	Status     string
 	Permission string
+	Team       CoreTeam
 }
 
 type CoreTeam struct {

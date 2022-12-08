@@ -16,7 +16,6 @@ type UserRequest struct {
 
 func toCore(data UserRequest) user.CoreUser {
 	return user.CoreUser{
-		ID:         0,
 		Full_Name:  data.Full_Name,
 		Email:      data.Email,
 		Password:   data.Password,
