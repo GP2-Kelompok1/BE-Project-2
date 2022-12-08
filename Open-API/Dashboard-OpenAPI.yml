@@ -1125,8 +1125,17 @@ components:
         status:
           type: string
           enum:
-           - active
-           - not-active
+            - Interview
+            - Join class
+            - Unit 1
+            - Unit 2
+            - Unit 3
+            - Repeat unit 1
+            - Repeat unit 2
+            - Repeat unit 3
+            - Placement
+            - Eliminated
+            - Graduated
         gender:
           type: integer
         current_address:
@@ -1144,17 +1153,8 @@ components:
         education_type:
           type: string
           enum:
-            - Interview
-            - Join class
-            - Unit 1
-            - Unit 2
-            - Unit 3
-            - Repeat unit 1
-            - Repeat unit 2
-            - Repeat unit 3
-            - Placement
-            - Eliminated
-            - Graduated
+            - informatics
+            - non-informatics
         education_major:
           type: string
         education_graduate:
