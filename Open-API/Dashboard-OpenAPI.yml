@@ -1111,6 +1111,8 @@ components:
           format: uint
         started_date:
           type: string
+        end_date:
+          type: string
     Mentee:
       type: object
       properties:
