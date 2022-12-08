@@ -23,7 +23,7 @@ type ServiceInterface interface {
 	GetAll() (data []CoreClass, err error)
 	Create(input CoreClass) (err error)
 	GetById(id int) (data CoreClass, err error)
-	// Update(data CoreUser, id int) (string, error)
+	UpdateClass(input CoreClass, id int) (err error)
 	// Delete(id int) (string, error)
 }
 
@@ -31,6 +31,6 @@ type RepositoryInterface interface {
 	GetAll() (data []CoreClass, err error)
 	Create(input CoreClass) (row int, err error)
 	GetById(id int) (data CoreClass, err error)
-	// Update(data CoreUser, id int) (string, error)
+	UpdateClass(input CoreClass, id int) (err error)
 	// Delete(id int) (string, error)
 }

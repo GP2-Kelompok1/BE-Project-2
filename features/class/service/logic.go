@@ -45,3 +45,12 @@ func (service *classService) GetById(id int) (data class.CoreClass, err error) {
 	}
 	return data, nil
 }
+
+func (service *classService) UpdateClass(dataCore class.CoreClass, id int) (err error) {
+	errUpdate := service.classRepository.UpdateClass(dataCore, id)
+	if errUpdate != nil {
+		return errors.New("failed update data, error query")
+	}
+	return nil
+
+}

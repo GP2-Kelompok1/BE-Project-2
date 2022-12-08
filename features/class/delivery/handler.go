@@ -22,7 +22,7 @@ func New(service class.ServiceInterface, e *echo.Echo) {
 	e.GET("/classes", handler.GetAll, middlewares.JWTMiddleware())
 	e.POST("/classes", handler.Create, middlewares.JWTMiddleware())
 	e.GET("/users/:id", handler.GetById)
-	// e.PUT("/users/:id", handler.Update)
+	e.PUT("/users/:id", handler.UpdateData)
 	// e.DELETE("/users/:id", handler.Delete)
 }
 
@@ -64,4 +64,24 @@ func (delivery *ClassDelivery) GetById(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
 	}
 	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success get users", dataResponse))
+}
+
+func (delivery *ClassDelivery) UpdateData(c echo.Context) error {
+	id, errConv := strconv.Atoi(c.Param("id"))
+	if errConv != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error conv data "+errConv.Error()))
+	}
+
+	classInput := ClassRequest{}
+	errBind := c.Bind(&classInput)
+	if errBind != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
+	}
+
+	dataCore := toCore(classInput)
+	errUpt := delivery.classService.UpdateClass(dataCore, id)
+	if errUpt != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error Db update "+errUpt.Error()))
+	}
+	return c.JSON(http.StatusOK, helper.SuccessResponse("success update data"))
 }

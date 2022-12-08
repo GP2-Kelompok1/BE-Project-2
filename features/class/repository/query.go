@@ -54,3 +54,15 @@ func (repo *classRepository) GetById(id int) (data class.CoreClass, err error) {
 	IdClassCore = IdClass.toCore()
 	return IdClassCore, nil
 }
+
+func (repo *classRepository) UpdateClass(datacore class.CoreClass, id int) (err error) {
+	userGorm := fromCore(datacore)
+	tx := repo.db.Where("id= ?", id).Updates(userGorm)
+	if tx.Error != nil {
+		return tx.Error
+	}
+	if tx.RowsAffected == 0 {
+		return errors.New("update user failed")
+	}
+	return nil
+}
