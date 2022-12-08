@@ -5,6 +5,7 @@ import (
 	"immersive-dashboard/middlewares"
 	"immersive-dashboard/utils/helper"
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 )
@@ -20,7 +21,7 @@ func New(service user.ServiceInterface, e *echo.Echo) {
 
 	e.GET("/users", handler.GetAll, middlewares.JWTMiddleware())
 	e.POST("/users", handler.Create, middlewares.JWTMiddleware())
-	// e.GET("/users/:id", handler.GetById)
+	e.GET("/users/:id", handler.GetById)
 	// e.PUT("/users/:id", handler.Update)
 	// e.DELETE("/users/:id", handler.Delete)
 }
@@ -66,3 +67,16 @@ func (delivery *UserDelivery) Create(c echo.Context) error {
 // func (delivery *UserDelivery) Delete(c echo.Context) error {
 
 // }
+func (delivery *UserDelivery) GetById(c echo.Context) error {
+	id, errBind := strconv.Atoi(c.Param("id"))
+	if errBind != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
+	}
+
+	IdUser, err := delivery.userService.GetById(id)
+	dataResponse := fromCore(IdUser)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
+	}
+	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success get users", dataResponse))
+}
