@@ -37,3 +37,11 @@ func (service *classService) GetAll() (data []class.CoreClass, err error) {
 	return
 
 }
+
+func (service *classService) GetById(id int) (data class.CoreClass, err error) {
+	data, errGet := service.classRepository.GetById(id)
+	if errGet != nil {
+		return data, errors.New("failed get class by id data, error query")
+	}
+	return data, nil
+}

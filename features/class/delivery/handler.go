@@ -5,6 +5,7 @@ import (
 	"immersive-dashboard/middlewares"
 	"immersive-dashboard/utils/helper"
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 )
@@ -20,7 +21,7 @@ func New(service class.ServiceInterface, e *echo.Echo) {
 
 	e.GET("/classes", handler.GetAll, middlewares.JWTMiddleware())
 	e.POST("/classes", handler.Create, middlewares.JWTMiddleware())
-	// e.GET("/users/:id", handler.GetById)
+	e.GET("/users/:id", handler.GetById)
 	// e.PUT("/users/:id", handler.Update)
 	// e.DELETE("/users/:id", handler.Delete)
 }
@@ -51,18 +52,16 @@ func (delivery *ClassDelivery) Create(c echo.Context) error {
 	return c.JSON(http.StatusCreated, helper.SuccessResponse("success create data"))
 }
 
-// func (delivery *UserDelivery) GetById(c echo.Context) error {
-// 	id, errconv := strconv.Atoi(c.Param("id"))
-// 	if errconv != nil {
-// 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error read data "))
-// 	}
-// 	dataCore := toCore(id)
-// }
+func (delivery *ClassDelivery) GetById(c echo.Context) error {
+	id, errBind := strconv.Atoi(c.Param("id"))
+	if errBind != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
+	}
 
-// func (delivery *UserDelivery) Update(c echo.Context) error {
-
-// }
-
-// func (delivery *UserDelivery) Delete(c echo.Context) error {
-
-// }
+	IdClass, err := delivery.classService.GetById(id)
+	dataResponse := fromCore(IdClass)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
+	}
+	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success get users", dataResponse))
+}

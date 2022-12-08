@@ -43,6 +43,14 @@ func (repo *classRepository) GetAll() (data []class.CoreClass, err error) {
 }
 
 // GetById implements user.RepositoryInterface
-func (*classRepository) GetById(id int) (data class.CoreClass, err error) {
-	panic("unimplemented")
+func (repo *classRepository) GetById(id int) (data class.CoreClass, err error) {
+	var IdClass Class
+	var IdClassCore = class.CoreClass{}
+	IdClass.ID = uint(id)
+	tx := repo.db.First(&IdClass, IdClass.ID)
+	if tx.Error != nil {
+		return IdClassCore, tx.Error
+	}
+	IdClassCore = IdClass.toCore()
+	return IdClassCore, nil
 }
