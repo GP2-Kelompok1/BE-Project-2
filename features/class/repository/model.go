@@ -47,7 +47,6 @@ type Mentee struct {
 	Education_Major       string
 	Education_Graduate    string
 	Education_Institution string
-	Classes               Class
 }
 
 // mengubah struct core ke struct model gorm
