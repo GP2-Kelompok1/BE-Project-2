@@ -37,3 +37,11 @@ func (service *teamService) GetAll() (data []team.CoreTeam, err error) {
 	return
 
 }
+
+func (service *teamService) GetById(id int) (data team.CoreTeam, err error) {
+	data, errGet := service.teamRepository.GetById(id)
+	if errGet != nil {
+		return data, errors.New("failed get team by id data, error query")
+	}
+	return data, nil
+}
