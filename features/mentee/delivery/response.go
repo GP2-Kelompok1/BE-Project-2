@@ -5,9 +5,9 @@ import "immersive-dashboard/features/mentee"
 type MenteeResponse struct {
 	ID                    uint             `json:"id"`
 	Mentee_Name           string           `json:"mentee_name"`
-	Classes               mentee.CoreClass `json:"id_class"`
+	Classes               mentee.CoreClass `json:"classes"`
 	Status                string           `json:"status"`
-	Kategori              string           `json:"kategori"`
+	Category              string           `json:"category"`
 	Gender                string           `json:"gender"`
 	Current_Address       string           `json:"current_address"`
 	Home_Address          string           `json:"home_address"`
@@ -25,11 +25,14 @@ type MenteeResponse struct {
 
 func fromCore(dataCore mentee.CoreMentee) MenteeResponse {
 	return MenteeResponse{
-		ID:                    dataCore.ID,
-		Mentee_Name:           dataCore.Mentee_Name,
-		Classes:               dataCore.Classes,
+		ID:          dataCore.ID,
+		Mentee_Name: dataCore.Mentee_Name,
+		Classes: mentee.CoreClass{
+			ID:         dataCore.Classes.ID,
+			Class_Name: dataCore.Classes.Class_Name,
+		},
 		Status:                dataCore.Status,
-		Kategori:              dataCore.Kategori,
+		Category:              dataCore.Category,
 		Gender:                dataCore.Gender,
 		Current_Address:       dataCore.Current_Address,
 		Home_Address:          dataCore.Home_Address,

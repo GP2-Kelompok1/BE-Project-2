@@ -13,6 +13,10 @@ import (
 	teamRepo "immersive-dashboard/features/team/repository"
 	teamService "immersive-dashboard/features/team/service"
 
+	menteeDelivery "immersive-dashboard/features/mentee/delivery"
+	menteeRepo "immersive-dashboard/features/mentee/repository"
+	menteeService "immersive-dashboard/features/mentee/service"
+
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 )
@@ -30,4 +34,8 @@ func InitFactory(e *echo.Echo, db *gorm.DB) {
 	teamRepoFactory := teamRepo.New(db)
 	teamServiceFactory := teamService.New(teamRepoFactory)
 	teamDelivery.New(teamServiceFactory, e)
+
+	menteeRepoFactory := menteeRepo.New(db)
+	menteeServiceFactory := menteeService.New(menteeRepoFactory)
+	menteeDelivery.New(menteeServiceFactory, e)
 }

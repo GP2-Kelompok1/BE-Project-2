@@ -7,7 +7,7 @@ type CoreMentee struct {
 	Mentee_Name           string `validate:"required"`
 	Classes               CoreClass
 	Status                string `validate:"required"`
-	Kategori              string `validate:"required"`
+	Category              string `validate:"required"`
 	Gender                string `validate:"required"`
 	Current_Address       string `validate:"required"`
 	Home_Address          string `validate:"required"`
