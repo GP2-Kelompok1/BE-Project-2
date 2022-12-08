@@ -10,7 +10,7 @@ type FeedbackResponse struct {
 	Users          feedback.CoreUser   `json:"users"`
 	Description    string              `json:"description"`
 	Mentee_Status  string              `json:"mentee_status"`
-	Changed_Status string              `json:"mentee_status"`
+	Changed_Status string              `json:"changed_status"`
 }
 
 func fromCore(dataCore feedback.CoreFeedback) FeedbackResponse {
