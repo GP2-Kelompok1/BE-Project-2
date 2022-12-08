@@ -23,7 +23,7 @@ func New(service feedback.ServiceInterface, e *echo.Echo) {
 	e.POST("/feedbacks", handler.Create, middlewares.JWTMiddleware())
 	// e.GET("/users/:id", handler.GetById)
 	e.PUT("/feedbacks/:id", handler.UpdateData, middlewares.JWTMiddleware())
-	// e.DELETE("/users/:id", handler.Delete)
+	e.DELETE("/feedbacks/:id", handler.DeleteFeedback, middlewares.JWTMiddleware())
 }
 
 func (delivery *FeedbackDelivery) GetAll(c echo.Context) error {
