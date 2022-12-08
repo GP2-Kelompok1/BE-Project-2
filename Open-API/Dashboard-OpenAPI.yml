@@ -82,7 +82,6 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: '#/components/schemas/Users'
               example:
                 full_name: "agus"
                 email: "agus@mail.com"
@@ -179,7 +178,7 @@ paths:
         '404':
           $ref: '#/components/responses/404'
 
-  /users/{id_user}:
+  /users/{user_id}:
     get:
       tags:
         - Users
@@ -188,7 +187,7 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_user
+        - name: user_id
           description: "id user"
           required: true
           in: path
@@ -228,7 +227,7 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_user
+        - name: user_id
           description: "id user"
           required: true
           in: path
@@ -255,8 +254,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_user
-          description: "id user"
+        - name: user_id
+          description: "user_id"
           required: true
           in: path
           schema:
@@ -272,7 +271,7 @@ paths:
                 full_name: "agus"
                 email: "agus@mail.com"
                 password: "qwerty123"
-                id_team: 1
+                team_id: 1
                 role: "default"
                 status: "active"
                 permission: "superuser"
@@ -363,7 +362,7 @@ paths:
         '404':
           $ref: '#/components/responses/404'
 
-  /teams/{id_team}:
+  /teams/{team_id}:
     get:
       tags:
         - Teams
@@ -372,8 +371,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_team
-          description: "id team"
+        - name: team_id
+          description: "team_id"
           required: true
           in: path
           schema:
@@ -403,8 +402,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_team
-          description: "id teams"
+        - name: team_id
+          description: "teams_id"
           required: true
           in: path
           schema:
@@ -430,8 +429,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_team
-          description: "id teams"
+        - name: team_id
+          description: "team_id"
           required: true
           in: path
           schema:
@@ -473,7 +472,7 @@ paths:
               type: object
               example:
                 class_name: "BE 13"
-                id_user: 1
+                user_id: 1
                 started_date: "2022-08-27"
                 end_date: "2022-10-15"
       responses:
@@ -534,7 +533,7 @@ paths:
                       class_name: "BE 13"
                       user:
                         {
-                        id_user: 1,
+                        id: 1,
                         full_name: "fakhry"
                         }  
                       started_date: "2022-08-27"
@@ -543,7 +542,7 @@ paths:
                       class_name: "FE 10"
                       user:
                         {
-                        id_user: 2,
+                        id: 2,
                         full_name: "bagas"
                         }  
                       started_date: "2022-09-25" 
@@ -551,7 +550,7 @@ paths:
         '404':
           $ref: '#/components/responses/404'
 
-  /classes/{id_class}:
+  /classes/{class_id}:
     get:
       tags:
         - Classes
@@ -560,8 +559,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_class
-          description: "id class"
+        - name: class_id
+          description: "class_id"
           required: true
           in: path
           schema:
@@ -582,7 +581,7 @@ paths:
                       class_name: "BE 13"
                       user:
                         {
-                        id_user: 1,
+                        id: 1,
                         full_name: "fakhry"
                         }  
                       started_date: "2022-08-27"
@@ -598,8 +597,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_class
-          description: "id class"
+        - name: class_id
+          description: "class_id"
           required: true
           in: path
           schema:
@@ -625,8 +624,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_class
-          description: "id class"
+        - name: class_id
+          description: "class_id"
           required: true
           in: path
           schema:
@@ -640,7 +639,7 @@ paths:
               type: object
               example:
                 class_name: "BE 13"
-                id_user: 2
+                user_id: 2
                 started_date: "2022-08-27"
                 end_date: "2022-10-15"
       responses:
@@ -772,7 +771,7 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/schemas/ResponseWithoutData'
-  /mentees/{id_mentee}:
+  /mentees/{mentee_id}:
     get:
       tags:
         - Mentees
@@ -781,8 +780,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_mentee
-          description: "id mentee"
+        - name: mentee_id
+          description: "mentee_id"
           required: true
           in: path
           schema:
@@ -800,12 +799,12 @@ paths:
                   message: "success get mentees by id"
                   data:
                     - id: 1
+                      full_name: "M. Yusup"
                       class:
                         {
                           id: 1,
                           class_name : "BE_11"
                         }
-                      full_name: "M. Yusup"
                       email: "myusup@gmail.com"
                       phone: "081234567"
                       current_address: "jl rumah saya palembang"
@@ -819,15 +818,6 @@ paths:
                       emergency_name: "bapak ku"
                       emergency_phone: "08123457"
                       emergency_status: "orang tua"
-                      feedback: 
-                        {
-                        id: 1,
-                        mentee_status: "Ini bagian notes untuk mentee yang bersangkutan",
-                        id_user: "Jerry",
-                        changed_status: "Join"
-                        }
-
-                
         '404':
           $ref: '#/components/responses/404'
         '500':
@@ -840,8 +830,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_mentee
-          description: "id mentees"
+        - name: mentee_id
+          description: "mentee_id"
           required: true
           in: path
           schema:
@@ -867,8 +857,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_mentee
-          description: "id mentees"
+        - name: mentee_id
+          description: "mentee_id"
           required: true
           in: path
           schema:
@@ -914,14 +904,18 @@ paths:
             schema:
               type: object
               example:
-                id: 1
-                deskripsi: "Ini bagian notes untuk mentee yang bersangkutan"
-                user:
-                  {
-                    id_user: 1,
-                    full_name: "jerry"         
+                - id: 1
+                  mentees: {
+                    id: 1,
+                    mentee_name: "joko"
                   }
-                changed_status: "join"
+                  users: {
+                    id: 2,
+                    full_name: "fakhry"
+                  }
+                  description: "komentar feedback muuuuuuuuuuuuuuuuuuuuu"
+                  mentee_status: "interview"
+                  changed_status: "joined to 1"
       responses:
         '201':
           description: Add feedback berhasil.
@@ -943,7 +937,7 @@ paths:
                   message: "Add feedback gagal. semua field wajib diisi"
         '500':
           $ref: '#/components/responses/500'    
-  /feedback/{id_mentee}:
+  /feedback/{feedback_id}:
     get:
       tags:
         - Feedbacks
@@ -952,8 +946,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_mentee
-          description: "id mentee"
+        - name: feedback_id
+          description: "feedback_id"
           required: true
           in: path
           schema:
@@ -971,17 +965,23 @@ paths:
                   message: "success get feedback mentees by id"
                   data:
                     - id: 1
-                      full_name: "M. Yusup"
-                      feedbacks:
-                        {
-                          id_user: 1,
-                          deskripsi: "Ini bagian notes untuk mentee yang bersangkutan 1"        
-                        }
+                      mentees: {
+                        id: 1,
+                        mentee_name: "joko"
+                      }
+                      users: {
+                        id: 2,
+                        full_name: "fakhry"
+                      }
+                      description: "komentar feedback muuuuuuuuuuuuuuuuuuuuu"
+                      mentee_status: "interview"
+                      changed_status: "joined to 1"
+                        
         '404':
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  /feedbacks/{id_feedback}:
+  /feedbacks/{feedback_id}:
     delete:
       tags:
         - Feedbacks
@@ -990,8 +990,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_feedback
-          description: "id feedback"
+        - name: feedback_id
+          description: "feedback_id"
           required: true
           in: path
           schema:
@@ -1019,8 +1019,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_feedback
-          description: "id feedback"
+        - name: feedback_id
+          description: "feedback id"
           required: true
           in: path
           schema:
@@ -1074,7 +1074,7 @@ components:
           type: string
         password:
           type: string
-        id_team:
+        team_id:
           type: integer
           format: uint
         role:
@@ -1109,7 +1109,7 @@ components:
           format: uint
         class_name:
           type: string
-        id_user:
+        user_id:
           type: integer
           format: uint
         started_date:
@@ -1124,7 +1124,7 @@ components:
           format: uint
         mentee_name:
           type: string
-        id_class:
+        class_id:
           type: integer
           format: uint
         status:
@@ -1173,10 +1173,10 @@ components:
         id:
           type: integer
           format: uint
-        id_mentee:
+        mentee_id:
           type: integer
           format: uint
-        id_user:
+        user_id:
           type: integer
           format: uint
         deskripsi:
