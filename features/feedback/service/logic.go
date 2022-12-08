@@ -54,3 +54,11 @@ func (service *feedbackService) UpdateFeedback(dataCore feedback.CoreFeedback, i
 	return nil
 
 }
+
+func (service *feedbackService) DeleteFeedback(id int) (err error) {
+	_, errDel := service.feedbackRepository.DeleteFeedback(id)
+	if errDel != nil {
+		return errors.New("failed delete feedback, error query")
+	}
+	return nil
+}

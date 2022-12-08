@@ -26,7 +26,7 @@ type ServiceInterface interface {
 	Create(input CoreFeedback) (err error)
 	// GetById(id int) (data CoreFeedback, err error)
 	UpdateFeedback(input CoreFeedback, id int) (err error)
-	// Delete(id int) (string, error)
+	DeleteFeedback(id int) (err error)
 }
 
 type RepositoryInterface interface {
@@ -34,5 +34,5 @@ type RepositoryInterface interface {
 	Create(input CoreFeedback) (row int, err error)
 	// GetById(id int) (data CoreFeedback, err error)
 	UpdateFeedback(input CoreFeedback, id int) (err error)
-	// Delete(id int) (string, error)
+	DeleteFeedback(id int) (row int, err error)
 }
