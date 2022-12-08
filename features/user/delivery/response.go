@@ -5,13 +5,13 @@ import (
 )
 
 type UserResponse struct {
-	ID         uint         `json:"id"`
-	Full_Name  string       `json:"full_name"`
-	Email      string       `json:"email"`
-	Teams      TeamResponse `json:"teams"`
-	Role       string       `json:"role"`
-	Status     string       `json:"status"`
-	Permission string       `json:"permission"`
+	ID         uint           `json:"id"`
+	Full_Name  string         `json:"full_name"`
+	Email      string         `json:"email"`
+	Teams      []TeamResponse `json:"teams"`
+	Role       string         `json:"role"`
+	Status     string         `json:"status"`
+	Permission string         `json:"permission"`
 }
 
 type TeamResponse struct {
@@ -21,13 +21,9 @@ type TeamResponse struct {
 
 func fromCore(dataCore user.CoreUser) UserResponse {
 	return UserResponse{
-		ID:        dataCore.ID,
-		Full_Name: dataCore.Full_Name,
-		Email:     dataCore.Email,
-		Teams: TeamResponse{
-			ID:        dataCore.Teams.ID,
-			Team_Name: dataCore.Teams.Team_Name,
-		},
+		ID:         dataCore.ID,
+		Full_Name:  dataCore.Full_Name,
+		Email:      dataCore.Email,
 		Role:       dataCore.Role,
 		Status:     dataCore.Status,
 		Permission: dataCore.Permission,

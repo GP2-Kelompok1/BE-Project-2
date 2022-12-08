@@ -49,7 +49,7 @@ func fromCore(dataCore _user.CoreUser) User {
 		Full_Name:  dataCore.Full_Name,
 		Email:      dataCore.Email,
 		Password:   dataCore.Password,
-		TeamID:     dataCore.Teams.ID, // <<< lihat ini
+		TeamID:     dataCore.ID,
 		Role:       dataCore.Role,
 		Status:     dataCore.Status,
 		Permission: dataCore.Permission,
@@ -60,13 +60,9 @@ func fromCore(dataCore _user.CoreUser) User {
 // mengubah struct model gorm ke struct core
 func (dataModel *User) toCore() _user.CoreUser {
 	return _user.CoreUser{
-		ID:        dataModel.ID,
-		Full_Name: dataModel.Full_Name,
-		Email:     dataModel.Email,
-		Teams: _user.CoreTeam{ // <<< lihat ini
-			ID:        dataModel.TeamID,
-			Team_Name: dataModel.Team.Team_Name,
-		},
+		ID:         dataModel.ID,
+		Full_Name:  dataModel.Full_Name,
+		Email:      dataModel.Email,
 		Role:       dataModel.Role,
 		Status:     dataModel.Status,
 		Permission: dataModel.Permission,
