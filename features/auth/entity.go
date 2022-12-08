@@ -1,23 +1,23 @@
 package auth
 
 import (
+	"time"
+
 	"gorm.io/gorm"
 )
 
 type CoreUser struct {
-	gorm.Model
+	ID         uint
 	Full_Name  string
 	Email      string
 	Password   string
-	Teams      []CoreTeam
+	TeamID     uint
 	Role       string
 	Status     string
 	Permission string
-}
-
-type CoreTeam struct {
-	gorm.Model
-	Team_Name string
+	CreatedAt  time.Time
+	UpdatedAt  time.Time
+	DeletedAt  gorm.DeletedAt
 }
 
 type ServiceInterface interface {
