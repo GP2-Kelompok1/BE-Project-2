@@ -24,7 +24,6 @@ type User struct {
 type Team struct {
 	gorm.Model
 	Team_Name string
-	Users     []User
 }
 type Class struct {
 	gorm.Model
