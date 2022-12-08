@@ -23,7 +23,7 @@ func New(service class.ServiceInterface, e *echo.Echo) {
 	e.POST("/classes", handler.Create, middlewares.JWTMiddleware())
 	e.GET("/users/:id", handler.GetById)
 	e.PUT("/users/:id", handler.UpdateData)
-	// e.DELETE("/users/:id", handler.Delete)
+	e.DELETE("/users/:id", handler.DeleteClass)
 }
 
 func (delivery *ClassDelivery) GetAll(c echo.Context) error {
@@ -84,4 +84,19 @@ func (delivery *ClassDelivery) UpdateData(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error Db update "+errUpt.Error()))
 	}
 	return c.JSON(http.StatusOK, helper.SuccessResponse("success update data"))
+}
+
+func (delivery *ClassDelivery) DeleteClass(c echo.Context) error {
+	id, errConv := strconv.Atoi(c.Param("id"))
+	if errConv != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error conv data "+errConv.Error()))
+	}
+
+	errDel := delivery.classService.DeleteClass(id)
+	if errDel != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("error delete class"+errDel.Error()))
+	}
+
+	return c.JSON(http.StatusOK, helper.SuccessResponse("success delete data"))
+
 }

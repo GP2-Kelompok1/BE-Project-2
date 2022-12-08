@@ -66,3 +66,16 @@ func (repo *classRepository) UpdateClass(datacore class.CoreClass, id int) (err 
 	}
 	return nil
 }
+
+func (repo *classRepository) DeleteClass(id int) (row int, err error) {
+	idClass := Class{}
+
+	tx := repo.db.Delete(&idClass, id)
+	if tx.Error != nil {
+		return -1, tx.Error
+	}
+	if tx.RowsAffected == 0 {
+		return -1, errors.New("delete class by id failed")
+	}
+	return int(tx.RowsAffected), nil
+}

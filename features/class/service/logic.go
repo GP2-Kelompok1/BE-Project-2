@@ -54,3 +54,11 @@ func (service *classService) UpdateClass(dataCore class.CoreClass, id int) (err 
 	return nil
 
 }
+
+func (service *classService) DeleteClass(id int) (err error) {
+	_, errDel := service.classRepository.DeleteClass(id)
+	if errDel != nil {
+		return errors.New("failed delete class, error query")
+	}
+	return nil
+}
