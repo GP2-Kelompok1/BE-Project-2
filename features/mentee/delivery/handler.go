@@ -67,7 +67,7 @@ func (delivery *MenteeDelivery) GetById(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
 	}
-	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success get users", dataResponse))
+	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success get mentee", dataResponse))
 }
 
 func (delivery *MenteeDelivery) UpdateData(c echo.Context) error {

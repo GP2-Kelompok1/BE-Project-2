@@ -12,6 +12,10 @@ type ClassResponse struct {
 	End_Date     string         `json:"end_date"`
 }
 
+// type UserResponse struct {
+
+// }
+
 func fromCore(dataCore class.CoreClass) ClassResponse {
 	return ClassResponse{
 		ID:         dataCore.ID,
