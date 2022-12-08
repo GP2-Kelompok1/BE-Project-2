@@ -23,6 +23,7 @@ func fromCore(dataCore _team.CoreTeam) Team {
 // mengubah struct model gorm ke struct core
 func (dataModel *Team) toCore() _team.CoreTeam {
 	return _team.CoreTeam{
+		ID:        dataModel.ID,
 		Team_Name: dataModel.Team_Name,
 	}
 }
