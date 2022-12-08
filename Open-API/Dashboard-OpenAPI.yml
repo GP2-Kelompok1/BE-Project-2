@@ -87,7 +87,7 @@ paths:
                 full_name: "agus"
                 email: "agus@mail.com"
                 password: "qwerty123"
-                id_team: 1
+                team_id: 1
                 role: "default"
                 status: "active"
                 permission: "superuser"
@@ -272,7 +272,7 @@ paths:
                 full_name: "agus"
                 email: "agus@mail.com"
                 password: "qwerty123"
-                id_team: 1
+                team_id: 1
                 role: "default"
                 status: "active"
                 permission: "superuser"
@@ -473,9 +473,9 @@ paths:
               type: object
               example:
                 class_name: "BE 13"
-                id_user: 1
+                user_id: 1
                 started_date: "2022-08-27"
-
+                end_date: "2022-10-15"
       responses:
         '201':
           description: Add class berhasil.
@@ -534,18 +534,20 @@ paths:
                       class_name: "BE 13"
                       user:
                         {
-                        id_user: 1,
+                        id: 1,
                         full_name: "fakhry"
                         }  
                       started_date: "2022-08-27"
+                      end_date: "2022-10-15"
                     - id: 2
                       class_name: "FE 10"
                       user:
                         {
-                        id_user: 2,
+                        id: 2,
                         full_name: "bagas"
                         }  
-                      started_date: "2022-09-25"                
+                      started_date: "2022-09-25" 
+                      end_date: "2022-10-27"               
         '404':
           $ref: '#/components/responses/404'
 
@@ -558,8 +560,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_class
-          description: "id class"
+        - name: class_id
+          description: "class id"
           required: true
           in: path
           schema:
@@ -580,10 +582,11 @@ paths:
                       class_name: "BE 13"
                       user:
                         {
-                        id_user: 1,
+                        id: 1,
                         full_name: "fakhry"
                         }  
                       started_date: "2022-08-27"
+                      end_date: "2022-10-15"
                    
         '404':
           $ref: '#/components/responses/404'
@@ -595,8 +598,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_class
-          description: "id class"
+        - name: class_id
+          description: "class id"
           required: true
           in: path
           schema:
@@ -622,8 +625,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_class
-          description: "id class"
+        - name: class_id
+          description: "class id"
           required: true
           in: path
           schema:
@@ -637,8 +640,9 @@ paths:
               type: object
               example:
                 class_name: "BE 13"
-                id_user: 2
+                user_id: 2
                 started_date: "2022-08-27"
+                end_date: "2022-10-15"
       responses:
         '200':
           description: A list of teams
@@ -665,12 +669,14 @@ paths:
               type: object
               example:
                 mentee_name: "Mahmuda Karima"
+                class_id: 1
                 email: "daka@gmail.com"
                 phone: "081234567"
                 current_address: "jl rumah saya palembang"
                 home_address: "jl rumah saya palembang"
                 telegram: "@daka"
                 gender: "L"
+                status: "interview"
                 education_type: "non-informatics"
                 education_major: "akuntansi"
                 education_graduate: "2022"
@@ -678,8 +684,6 @@ paths:
                 emergency_name: "bapak ku"
                 emergency_phone: "08123457"
                 emergency_status: "orang tua"
-                status: "interview"
-                class_id: 1
       responses:
         '201':
           description: Register berhasil.
@@ -743,23 +747,23 @@ paths:
                   message: "success get all mentees"
                   data:
                     - id: 1
+                      mentee_name: "M.Yusuf"
                       class:
                         {
                           id: 1,
-                          class_name : "BE_11"
+                          class_name : "BE 11"
                         }
-                      full_name: "M.Yusuf"
                       status: "On Class"
                       education_type: "non-informatics"
                       gender : "L"
 
                     - id: 2
+                      mentee_name: "Wendy"
                       class:
                         {
                           id: 2,
                           class_name : "FE_8"
                         }
-                      full_name: "Wendy"
                       status: "On Class"
                       education_type: "non-informatics"
                       gender : "L"
@@ -796,12 +800,12 @@ paths:
                   message: "success get mentees by id"
                   data:
                     - id: 1
+                      mentee_name: "M. Yusup"
                       class:
                         {
                           id: 1,
                           class_name : "BE_11"
                         }
-                      full_name: "M. Yusup"
                       email: "myusup@gmail.com"
                       phone: "081234567"
                       current_address: "jl rumah saya palembang"
@@ -814,16 +818,7 @@ paths:
                       education_institution: "SMA 1 Palembang"
                       emergency_name: "bapak ku"
                       emergency_phone: "08123457"
-                      emergency_status: "orang tua"
-                      feedback: 
-                        {
-                        id: 1,
-                        mentee_status: "Ini bagian notes untuk mentee yang bersangkutan",
-                        id_user: "Jerry",
-                        changed_status: "Join"
-                        }
-
-                   
+                      emergency_status: "orang tua"                 
         '404':
           $ref: '#/components/responses/404'
         '500':
@@ -877,11 +872,22 @@ paths:
             schema:
               type: object
               example:
-                mentee_name: "Rachman Kamil"
-                email: "kamil@mail.com"
-                phone: "081123131"
-                telegram: "@kamil"
-                gendel: "L"
+                - id: 1
+                  mentee_name: "M. Yusup"
+                  class_id: 1
+                  email: "myusup@gmail.com"
+                  phone: "081234567"
+                  current_address: "jl rumah saya palembang"
+                  home_address: "jl rumah saya palembang"
+                  telegram: "@daka"
+                  gender: "L"
+                  education_type: "non-informatics"
+                  education_major: "akuntansi"
+                  education_graduate: "2022"
+                  education_institution: "SMA 1 Palembang"
+                  emergency_name: "bapak ku"
+                  emergency_phone: "08123457"
+                  emergency_status: "orang tua"
       responses:
         '200':
           description: A list of Mentees
@@ -914,9 +920,15 @@ paths:
                 deskripsi: "Ini bagian notes untuk mentee yang bersangkutan"
                 user:
                   {
-                    id_user: 1,
+                    id: 1,
                     full_name: "jerry"         
                   }
+                mentee:
+                  {
+                    id: 2,
+                    mentee_name: "sisca"         
+                  }
+                mentee_status: "interview"
                 changed_status: "join"
       responses:
         '201':
@@ -948,8 +960,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_mentee
-          description: "id mentee"
+        - name: mentee_id
+          description: "mentee id"
           required: true
           in: path
           schema:
@@ -967,13 +979,19 @@ paths:
                   message: "success get feedback mentees by id"
                   data:
                     - id: 1
-                      full_name: "M. Yusup"
-                      feedbacks:
+                      deskripsi: "Ini bagian notes untuk mentee yang bersangkutan"
+                      user:
                         {
                           id: 1,
-                          id_user: 1,
-                          deskripsi: "Ini bagian notes untuk mentee yang bersangkutan 1"
+                          full_name: "jerry"         
                         }
+                      mentee:
+                        {
+                          id: 2,
+                          mentee_name: "sisca"         
+                        }
+                      mentee_status: "interview"
+                      changed_status: "join"
         '404':
           $ref: '#/components/responses/404'
         '500':
@@ -987,8 +1005,8 @@ paths:
       security:
         - JWTAuth: []
       parameters:
-        - name: id_feedback
-          description: "id feedback"
+        - name: feedback_id
+          description: "feedback id"
           required: true
           in: path
           schema:
@@ -1088,8 +1106,8 @@ components:
         permission:
           type: string
           enum:
-          - superuser
-          - user
+            - superuser
+            - user
     Teams:
       type: object
       properties:
