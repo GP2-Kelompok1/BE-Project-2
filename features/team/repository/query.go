@@ -43,6 +43,14 @@ func (repo *teamRepository) GetAll() (data []team.CoreTeam, err error) {
 }
 
 // GetById implements user.RepositoryInterface
-func (*teamRepository) GetById(id int) (data team.CoreTeam, err error) {
-	panic("unimplemented")
+func (repo *teamRepository) GetById(id int) (data team.CoreTeam, err error) {
+	var IdTeam Team
+	var IdTeamCore = team.CoreTeam{}
+	IdTeam.ID = uint(id)
+	tx := repo.db.First(&IdTeam, IdTeam.ID)
+	if tx.Error != nil {
+		return IdTeamCore, tx.Error
+	}
+	IdTeamCore = IdTeam.toCore()
+	return IdTeamCore, nil
 }

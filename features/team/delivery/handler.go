@@ -5,6 +5,7 @@ import (
 	"immersive-dashboard/middlewares"
 	"immersive-dashboard/utils/helper"
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 )
@@ -20,7 +21,7 @@ func New(service team.ServiceInterface, e *echo.Echo) {
 
 	e.GET("/teams", handler.GetAll, middlewares.JWTMiddleware())
 	e.POST("/teams", handler.Create, middlewares.JWTMiddleware())
-	// e.GET("/users/:id", handler.GetById)
+	e.GET("/users/:id", handler.GetById)
 	// e.PUT("/users/:id", handler.Update)
 	// e.DELETE("/users/:id", handler.Delete)
 }
@@ -51,13 +52,19 @@ func (delivery *TeamDelivery) Create(c echo.Context) error {
 	return c.JSON(http.StatusCreated, helper.SuccessResponse("success create data"))
 }
 
-// func (delivery *UserDelivery) GetById(c echo.Context) error {
-// 	id, errconv := strconv.Atoi(c.Param("id"))
-// 	if errconv != nil {
-// 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error read data "))
-// 	}
-// 	dataCore := toCore(id)
-// }
+func (delivery *TeamDelivery) GetById(c echo.Context) error {
+	id, errconv := strconv.Atoi(c.Param("id"))
+	if errconv != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error read data "))
+	}
+
+	IdTeam, err := delivery.teamService.GetById(id)
+	dataResponse := fromCore(IdTeam)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+err.Error()))
+	}
+	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success get teams", dataResponse))
+}
 
 // func (delivery *UserDelivery) Update(c echo.Context) error {
 
