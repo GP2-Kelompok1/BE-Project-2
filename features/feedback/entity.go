@@ -2,8 +2,6 @@ package feedback
 
 type CoreFeedback struct {
 	ID             uint
-	MenteeID       uint
-	UserID         uint
 	Description    string
 	Mentee_Status  string
 	Changed_Status string
