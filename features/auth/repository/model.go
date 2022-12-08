@@ -23,7 +23,7 @@ type User struct {
 
 //DTO
 
-func (data User) toCore() auth.CoreUser {
+func (data User) ToCore() auth.CoreUser {
 	return auth.CoreUser{
 		ID:         data.ID,
 		Full_Name:  data.Full_Name,
