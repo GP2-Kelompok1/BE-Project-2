@@ -22,7 +22,7 @@ func New(service team.ServiceInterface, e *echo.Echo) {
 	e.GET("/teams", handler.GetAll, middlewares.JWTMiddleware())
 	e.POST("/teams", handler.Create, middlewares.JWTMiddleware())
 	e.GET("/users/:id", handler.GetById)
-	// e.PUT("/users/:id", handler.UpdateData)
+	e.PUT("/users/:id", handler.UpdateData)
 	// e.DELETE("/users/:id", handler.Delete)
 }
 
@@ -66,17 +66,26 @@ func (delivery *TeamDelivery) GetById(c echo.Context) error {
 	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success get teams", dataResponse))
 }
 
-// func (delivery *TeamDelivery) UpdateData(c echo.Context) error {
-// 	id, errConv := strconv.Atoi(c.Param("id"))
-// 	if errConv != nil {
-// 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error conv data "+errConv.Error()))
-// 	}
+func (delivery *TeamDelivery) UpdateData(c echo.Context) error {
+	id, errConv := strconv.Atoi(c.Param("id"))
+	if errConv != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error conv data "+errConv.Error()))
+	}
 
-// 	menteeInput := MenteeRequest{}
-// 	errBind := c.Bind(&menteeInput)
-// 	if errBind != nil {
-// 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
-// 	}
+	teamInput := TeamRequest{}
+	errBind := c.Bind(&teamInput)
+	if errBind != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
+	}
+	dataCore := toCore(teamInput)
+	errUpt := delivery.teamService.UpdateTeam(dataCore, id)
+	if errUpt != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error Db update "+errUpt.Error()))
+	}
+	return c.JSON(http.StatusOK, helper.SuccessResponse("success update data"))
+
+}
+
 // func (delivery *UserDelivery) Update(c echo.Context) error {
 
 // }
