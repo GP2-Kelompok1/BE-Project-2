@@ -15,8 +15,8 @@ type Feedback struct {
 	Description    string
 	Mentee_Status  string
 	Changed_Status string
-	Mentees        Mentee
-	Users          User
+	Mentee         Mentee
+	User           User
 }
 
 type User struct {
@@ -71,11 +71,11 @@ func (dataModel *Feedback) toCore() _feedback.CoreFeedback {
 		ID: dataModel.ID,
 		Mentees: _feedback.CoreMentee{
 			ID:          dataModel.MenteeID,
-			Mentee_Name: dataModel.Mentees.Mentee_Name,
+			Mentee_Name: dataModel.Mentee.Mentee_Name,
 		},
 		Users: _feedback.CoreUser{
 			ID:        dataModel.UserID,
-			Full_Name: dataModel.Users.Full_Name,
+			Full_Name: dataModel.User.Full_Name,
 		},
 		Description:    dataModel.Description,
 		Mentee_Status:  dataModel.Mentee_Status,

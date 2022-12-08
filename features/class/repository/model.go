@@ -14,7 +14,7 @@ type Class struct {
 	Started_Date string
 	End_Date     string
 	Mentees      []Mentee
-	Users        User
+	User         User
 }
 
 type User struct {
@@ -67,7 +67,7 @@ func (dataModel *Class) toCore() _class.CoreClass {
 		Class_Name: dataModel.Class_Name,
 		Users: _class.CoreUser{
 			ID:        dataModel.UserID,
-			Full_Name: dataModel.Users.Full_Name,
+			Full_Name: dataModel.User.Full_Name,
 		},
 		Started_Date: dataModel.Started_Date,
 		End_Date:     dataModel.End_Date,

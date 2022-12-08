@@ -26,7 +26,7 @@ type Mentee struct {
 	Education_Major       string
 	Education_Graduate    string
 	Education_Institution string
-	Classes               Class
+	Class                 Class
 	Feedbacks             []Feedback
 }
 type Class struct {
@@ -77,7 +77,7 @@ func (dataModel *Mentee) toCore() _mentee.CoreMentee {
 		Mentee_Name: dataModel.Mentee_Name,
 		Classes: _mentee.CoreClass{
 			ID:         dataModel.ClassID,
-			Class_Name: dataModel.Classes.Class_Name,
+			Class_Name: dataModel.Class.Class_Name,
 		},
 		Status:                dataModel.Status,
 		Category:              dataModel.Category,
