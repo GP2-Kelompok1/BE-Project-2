@@ -32,6 +32,13 @@ func fromCore(dataCore user.CoreUser) UserResponse {
 	}
 }
 
+// func toCoreTeam(dataCore user.CoreTeam) TeamResponse {
+// 	return TeamResponse{
+// 		ID:        dataCore.ID,
+// 		Team_Name: dataCore.Team_Name,
+// 	}
+// }
+
 func fromCoreList(dataCore []user.CoreUser) []UserResponse {
 	var dataResponse []UserResponse
 	for _, v := range dataCore {
