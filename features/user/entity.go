@@ -5,7 +5,6 @@ type CoreUser struct {
 	Full_Name  string
 	Email      string `validate:"required,email"`
 	Password   string `validate:"required"`
-	TeamID     uint
 	Role       string
 	Status     string
 	Permission string

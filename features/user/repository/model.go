@@ -49,7 +49,7 @@ func fromCore(dataCore _user.CoreUser) User {
 		Full_Name:  dataCore.Full_Name,
 		Email:      dataCore.Email,
 		Password:   dataCore.Password,
-		TeamID:     dataCore.ID,
+		TeamID:     dataCore.Team.ID,
 		Role:       dataCore.Role,
 		Status:     dataCore.Status,
 		Permission: dataCore.Permission,
@@ -63,7 +63,6 @@ func (dataModel *User) toCore() _user.CoreUser {
 		ID:        dataModel.ID,
 		Full_Name: dataModel.Full_Name,
 		Email:     dataModel.Email,
-		TeamID:    dataModel.TeamID,
 		Team: _user.CoreTeam{
 			ID:        dataModel.Team.ID,
 			Team_Name: dataModel.Team.Team_Name,

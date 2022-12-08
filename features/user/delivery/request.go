@@ -16,10 +16,12 @@ type UserRequest struct {
 
 func toCore(data UserRequest) user.CoreUser {
 	return user.CoreUser{
-		Full_Name:  data.Full_Name,
-		Email:      data.Email,
-		Password:   data.Password,
-		TeamID:     data.TeamID,
+		Full_Name: data.Full_Name,
+		Email:     data.Email,
+		Password:  data.Password,
+		Team: user.CoreTeam{
+			ID: data.TeamID,
+		},
 		Role:       data.Role,
 		Status:     data.Status,
 		Permission: data.Permission,
