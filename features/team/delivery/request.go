@@ -9,5 +9,7 @@ type TeamRequest struct {
 }
 
 func toCore(data TeamRequest) team.CoreTeam {
-	return team.CoreTeam{}
+	return team.CoreTeam{
+		Team_Name: data.Team_Name,
+	}
 }
