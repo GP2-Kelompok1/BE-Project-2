@@ -13,8 +13,8 @@ type Class struct {
 	UserID       uint
 	Started_Date string
 	End_Date     string
+	Mentees      []Mentee
 	Users        User
-	Mentees      Mentee
 }
 
 type User struct {
@@ -47,7 +47,7 @@ type Mentee struct {
 	Education_Major       string
 	Education_Graduate    string
 	Education_Institution string
-	Classes               []Class
+	Classes               Class
 }
 
 // mengubah struct core ke struct model gorm

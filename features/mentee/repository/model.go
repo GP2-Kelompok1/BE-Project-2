@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"immersive-dashboard/features/mentee"
 	_mentee "immersive-dashboard/features/mentee"
 
 	"gorm.io/gorm"
@@ -36,6 +35,16 @@ type Class struct {
 	Mentees      []Mentee
 }
 
+type Feedback struct {
+	gorm.Model
+	MenteeID       uint
+	UserID         uint
+	Description    string
+	Mentee_Status  string
+	Changed_Status string
+	Mentees        Mentee
+}
+
 // mengubah struct core ke struct model gorm
 func fromCore(dataCore _mentee.CoreMentee) Mentee {
 	userGorm := Mentee{
@@ -66,7 +75,7 @@ func (dataModel *Mentee) toCore() _mentee.CoreMentee {
 	return _mentee.CoreMentee{
 		ID:          dataModel.ID,
 		Mentee_Name: dataModel.Mentee_Name,
-		Classes: mentee.CoreClass{
+		Classes: _mentee.CoreClass{
 			ID:         dataModel.ClassID,
 			Class_Name: dataModel.Classes.Class_Name,
 		},
