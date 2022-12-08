@@ -22,7 +22,7 @@ type CoreUser struct {
 type ServiceInterface interface {
 	GetAll() (data []CoreClass, err error)
 	Create(input CoreClass) (err error)
-	// GetById(id int) (data CoreUser, err error)
+	GetById(id int) (data CoreClass, err error)
 	// Update(data CoreUser, id int) (string, error)
 	// Delete(id int) (string, error)
 }
@@ -30,7 +30,7 @@ type ServiceInterface interface {
 type RepositoryInterface interface {
 	GetAll() (data []CoreClass, err error)
 	Create(input CoreClass) (row int, err error)
-	// GetById(id int) (data CoreUser, err error)
+	GetById(id int) (data CoreClass, err error)
 	// Update(data CoreUser, id int) (string, error)
 	// Delete(id int) (string, error)
 }
