@@ -21,7 +21,7 @@ type ServiceInterface interface {
 	Create(input CoreUser) (err error)
 	GetById(id int) (data CoreUser, err error)
 	UpdateUser(input CoreUser, id int) (err error)
-	// Delete(id int) (string, error)
+	DeleteUser(id int) (err error)
 }
 
 type RepositoryInterface interface {
@@ -29,5 +29,5 @@ type RepositoryInterface interface {
 	Create(input CoreUser) (row int, err error)
 	GetById(id int) (data CoreUser, err error)
 	UpdateUser(input CoreUser, id int) (err error)
-	// Delete(id int) (string, error)
+	DeleteUser(id int) (row int, err error)
 }

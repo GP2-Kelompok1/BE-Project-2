@@ -23,7 +23,7 @@ func New(service user.ServiceInterface, e *echo.Echo) {
 	e.POST("/users", handler.Create, middlewares.JWTMiddleware())
 	e.GET("/users/:id", handler.GetById, middlewares.JWTMiddleware())
 	e.PUT("/users/:id", handler.UpdateData, middlewares.JWTMiddleware())
-	// e.DELETE("/users/:id", handler.Delete)
+	e.DELETE("/users/:id", handler.DeleteUser, middlewares.JWTMiddleware())
 }
 
 func (delivery *UserDelivery) GetAll(c echo.Context) error {
@@ -99,4 +99,19 @@ func (delivery *UserDelivery) UpdateData(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error Db update "+errUpt.Error()))
 	}
 	return c.JSON(http.StatusOK, helper.SuccessResponse("success update data"))
+}
+
+func (delivery *UserDelivery) DeleteUser(c echo.Context) error {
+	id, errConv := strconv.Atoi(c.Param("id"))
+	if errConv != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error conv data "+errConv.Error()))
+	}
+
+	errDel := delivery.userService.DeleteUser(id)
+	if errDel != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("error delete user"+errDel.Error()))
+	}
+
+	return c.JSON(http.StatusOK, helper.SuccessResponse("success delete data"))
+
 }
