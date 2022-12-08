@@ -47,7 +47,7 @@ func (repo *userRepository) GetById(id int) (data user.CoreUser, err error) {
 	var IdUser User
 	var IdUserCore = user.CoreUser{}
 	IdUser.ID = uint(id)
-	tx := repo.db.First(&IdUser, IdUser.ID)
+	tx := repo.db.Preload("Team").First(&IdUser, IdUser.ID)
 	if tx.Error != nil {
 		return IdUserCore, tx.Error
 	}
