@@ -88,3 +88,11 @@ func toCoreList(dataModel []User) []_user.CoreUser {
 	}
 	return dataCore
 }
+
+func toCoreListTeam(dataModel []Team) []_user.CoreTeam {
+	var dataCore []_user.CoreTeam
+	for _, v := range dataModel {
+		dataCore = append(dataCore, v.toCoreTeam())
+	}
+	return dataCore
+}

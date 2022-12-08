@@ -1,6 +1,8 @@
 package delivery
 
-import "immersive-dashboard/features/user"
+import (
+	"immersive-dashboard/features/user"
+)
 
 type UserResponse struct {
 	ID         uint         `json:"id"`
@@ -32,13 +34,14 @@ func fromCore(dataCore user.CoreUser) UserResponse {
 	}
 }
 
-// func toCoreTeam(dataCore user.CoreTeam) TeamResponse {
-// 	return TeamResponse{
-// 		ID:        dataCore.ID,
-// 		Team_Name: dataCore.Team_Name,
-// 	}
-// }
+func fromCoreTeam(dataCore user.CoreTeam) TeamResponse {
+	return TeamResponse{
+		ID:        dataCore.ID,
+		Team_Name: dataCore.Team_Name,
+	}
+}
 
+// data dari core ke response
 func fromCoreList(dataCore []user.CoreUser) []UserResponse {
 	var dataResponse []UserResponse
 	for _, v := range dataCore {
@@ -46,3 +49,11 @@ func fromCoreList(dataCore []user.CoreUser) []UserResponse {
 	}
 	return dataResponse
 }
+
+// func fromCoreTeamList(dataCore []user.CoreTeam) []TeamResponse {
+// 	var dataResponse []TeamResponse
+// 	for _, v := range dataCore {
+// 		dataResponse = append(dataResponse, fromCoreTeam(v))
+// 	}
+// 	return dataResponse
+// }
