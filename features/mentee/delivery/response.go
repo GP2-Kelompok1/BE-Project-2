@@ -14,7 +14,7 @@ type MenteeResponse struct {
 	Telegram              string        `json:"telegram"`
 	Phone                 string        `json:"phone"`
 	Emergency_Name        string        `json:"emergency_name"`
-	Emergency_Phone       string        `json:"emergency-phone"`
+	Emergency_Phone       string        `json:"emergency_phone"`
 	Emergency_Status      string        `json:"emergency_status"`
 	Education_Type        string        `json:"education_type"`
 	Education_Major       string        `json:"education_major"`
